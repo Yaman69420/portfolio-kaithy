@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "sh post-deploy.sh && heroku-php-apache2 public/",
+    "startCommand": "sh post-deploy.sh && php -c php.ini -S 0.0.0.0:$PORT -t public",
     "restartPolicyType": "ON_FAILURE"
   }
 }
