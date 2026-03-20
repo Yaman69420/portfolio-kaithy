@@ -35,7 +35,7 @@ class ArtworkController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
-            'image' => 'required|image|max:5120', // Max 5MB
+            'image' => 'required|image|max:10240', // Max 10MB
             'is_published' => 'boolean',
             'order' => 'integer',
             'metadata' => 'nullable|array',
@@ -77,7 +77,7 @@ class ArtworkController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
-            'image' => 'nullable|image|max:5120',
+            'image' => 'nullable|image|max:10240', // Max 10MB
             'is_published' => 'boolean',
             'order' => 'integer',
             'metadata' => 'nullable|array',
