@@ -8,6 +8,7 @@ mkdir -p storage/framework/cache
 mkdir -p storage/logs
 
 # Run migrations
+php artisan optimize:clear
 php artisan migrate --force
 
 # Create storage link
