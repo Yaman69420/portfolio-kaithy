@@ -1,8 +1,8 @@
 <x-layouts.admin>
-    <header class="mb-12 flex justify-between items-center">
-        <h1 class="text-4xl font-serif font-bold tracking-tight">Kunstwerken</h1>
+    <header class="mb-12 flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+        <h1 class="text-3xl md:text-4xl font-serif font-bold tracking-tight text-center md:text-left">Kunstwerken</h1>
         <a href="{{ route('admin.artworks.create') }}" 
-           class="px-8 py-3 bg-black text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-gray-800 transition-all shadow-lg">
+           class="w-full md:w-auto px-8 py-3 bg-black text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-gray-800 transition-all shadow-lg text-center">
             Nieuw Kunstwerk
         </a>
     </header>

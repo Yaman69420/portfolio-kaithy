@@ -1,6 +1,6 @@
 <x-layouts.admin>
     <header class="mb-12">
-        <h1 class="text-4xl font-serif font-bold tracking-tight">Dashboard</h1>
+        <h1 class="text-3xl md:text-4xl font-serif font-bold tracking-tight text-center md:text-left">Dashboard</h1>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -21,7 +21,7 @@
     </div>
     
     <div class="mt-12 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="p-8 border-b border-gray-50 flex justify-between items-center">
+        <div class="p-8 border-b border-gray-50 flex flex-col md:flex-row justify-between items-center gap-4">
             <h2 class="text-xl font-serif font-bold">Recente Berichten</h2>
             <a href="#" class="text-xs uppercase tracking-widest font-bold text-gray-400 hover:text-black transition-colors">Alle berichten</a>
         </div>

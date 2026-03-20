@@ -1,6 +1,6 @@
 <x-layouts.admin>
     <header class="mb-12">
-        <h1 class="text-4xl font-serif font-bold tracking-tight">Categorieën</h1>
+        <h1 class="text-3xl md:text-4xl font-serif font-bold tracking-tight text-center md:text-left">Categorieën</h1>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -23,6 +23,7 @@
 
         <!-- List of existing -->
         <div class="lg:col-span-2 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
                     <tr class="bg-gray-50 border-b border-gray-100">
@@ -50,6 +51,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </x-layouts.admin>
