@@ -15,19 +15,19 @@
 
             <div class="md:w-1/2 space-y-8">
                 <h1 class="text-5xl font-serif font-bold tracking-tight">Kaithy</h1>
-                <h2 class="text-xl italic text-gray-500 font-serif">Beeldend Kunstenaar & Visionair</h2>
-                
+                <h2 class="text-xl italic text-gray-500 font-serif">Deez</h2>
+
                 <div class="prose prose-stone text-gray-600 leading-loose space-y-6">
                     <p>
-                        Mijn werk verkent de grens tussen de fysieke realiteit en de abstracte wereld van emoties. Door gebruik te maken van uiteenlopende materialen probeer ik de essentie van menselijke ervaringen vast te leggen.
+                        nuts.
                     </p>
                     <p>
-                        Gevestigd in een rustig atelier in de stad, laat ik me inspireren door de kleine details in het dagelijks leven die vaak over het hoofd worden gezien. Mijn passie ligt bij het creëren van werken die niet alleen visueel aantrekkelijk zijn, maar ook uitnodigen tot reflectie.
+                         meow.
                     </p>
                 </div>
 
                 <div class="pt-8">
-                    <a href="{{ route('contact.show') }}" 
+                    <a href="{{ route('contact.show') }}"
                        class="inline-flex items-center px-10 py-5 bg-black text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-gray-800 transition-all shadow-lg">
                         Laten we kennismaken
                     </a>
