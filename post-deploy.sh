@@ -10,6 +10,7 @@ mkdir -p storage/logs
 # Run migrations
 php artisan optimize:clear
 php artisan migrate --force
+php artisan db:seed --force
 
 # Create storage link
 php artisan storage:link --force

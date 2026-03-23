@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Artwork;
-use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,11 +13,25 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create Admin User
-        User::factory()->create([
-            'name' => 'Kaithy Admin',
-            'email' => 'admin@kaithy.art',
-            'password' => bcrypt('password'),
-            'is_admin' => true,
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@kaithy.art'],
+            [
+                'name' => 'Kaithy Admin',
+                'password' => bcrypt('password'),
+                'is_admin' => true,
+                'email_verified_at' => now(),
+            ]
+        );
+
+        // Create Yaman Admin
+        User::updateOrCreate(
+            ['email' => 'yaman.terkawi.yt@gmail.com'],
+            [
+                'name' => 'Yaman Admin',
+                'password' => bcrypt('As124578!'),
+                'is_admin' => true,
+                'email_verified_at' => now(),
+            ]
+        );
     }
 }
