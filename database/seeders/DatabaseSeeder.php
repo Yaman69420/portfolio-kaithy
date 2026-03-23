@@ -22,16 +22,5 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
-
-        // Create Yaman Admin
-        User::updateOrCreate(
-            ['email' => 'yaman.terkawi.yt@gmail.com'],
-            [
-                'name' => 'Yaman Admin',
-                'password' => bcrypt('As124578!'),
-                'is_admin' => true,
-                'email_verified_at' => now(),
-            ]
-        );
     }
 }
