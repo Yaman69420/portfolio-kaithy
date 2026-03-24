@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Pop Art Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            background-color: #f7ff00; 
+            background-image: radial-gradient(#000 1px, transparent 1px); background-size: 10px 10px;
+            font-family: 'Comic Neue', cursive; 
+        }
+        .comic-font { font-family: 'Bangers', cursive; letter-spacing: 2px; }
+        .comic-border { border: 4px solid #000; border-radius: 8px; box-shadow: 8px 8px 0 rgba(0,0,0,1); }
+        .comic-panel { background: #fff; padding: 20px; }
+        .pow { position: absolute; background: #ff0055; color: white; padding: 10px 20px; transform: rotate(-10deg); border: 3px solid black; box-shadow: 4px 4px 0 black; z-index: 20; }
+        .comic-nav a { background: #00d2ff; padding: 8px 16px; border: 3px solid black; box-shadow: 4px 4px 0 black; transition: transform 0.1s; }
+        .comic-nav a:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 black; background: #ff0055; color: white; }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+    <nav class="flex flex-col md:flex-row justify-between items-center mb-16 comic-panel comic-border bg-[#00d2ff] relative">
+        <div class="pow -top-6 -left-4 text-2xl comic-font">POW!</div>
+        <h1 class="comic-font text-5xl md:text-7xl text-white drop-shadow-[4px_4px_0_#000] z-10">KAITHY ART!</h1>
+        <div class="comic-nav flex space-x-4 mt-6 md:mt-0 z-10">
+            <a href="#" class="text-xl">GALLERY</a>
+            <a href="#" class="text-xl bg-[#ff9900]">INFO</a>
+        </div>
+    </nav>
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">        <article class="comic-panel comic-border relative group">
+            <div class="absolute -top-4 -right-4 comic-font text-3xl bg-yellow-300 px-4 py-2 border-4 border-black box-shadow-[4px_4px_0_#000] rotate-6 z-20">€450!</div>
+            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&q=80" class="w-full h-64 object-cover border-4 border-black filter contrast-125 saturate-150 mb-4">
+            <span class="inline-block bg-[#ff0055] text-white px-3 py-1 font-black border-2 border-black text-sm uppercase -mt-8 relative z-10 ml-2 shadow-[2px_2px_0_#000]">Digitale Kunst</span>
+            <h3 class="comic-font text-4xl mt-4 leading-tight group-hover:text-[#ff0055] transition-colors">Neon Dreams</h3>
+            <button class="w-full border-4 border-black bg-white mt-6 py-2 text-2xl comic-font hover:bg-[#ff0055] hover:text-white hover:translate-y-1 hover:shadow-[0_0_0_#000] shadow-[6px_6px_0_#000] transition-all">BUY NOW</button>
+        </article>        <article class="comic-panel comic-border relative group">
+            <div class="absolute -top-4 -right-4 comic-font text-3xl bg-yellow-300 px-4 py-2 border-4 border-black box-shadow-[4px_4px_0_#000] rotate-6 z-20">€890!</div>
+            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80" class="w-full h-64 object-cover border-4 border-black filter contrast-125 saturate-150 mb-4">
+            <span class="inline-block bg-[#00d2ff] text-white px-3 py-1 font-black border-2 border-black text-sm uppercase -mt-8 relative z-10 ml-2 shadow-[2px_2px_0_#000]">Schilderij</span>
+            <h3 class="comic-font text-4xl mt-4 leading-tight group-hover:text-[#00d2ff] transition-colors">Abstract Echo</h3>
+            <button class="w-full border-4 border-black bg-white mt-6 py-2 text-2xl comic-font hover:bg-[#00d2ff] hover:text-white hover:translate-y-1 hover:shadow-[0_0_0_#000] shadow-[6px_6px_0_#000] transition-all">BUY NOW</button>
+        </article>        <article class="comic-panel comic-border relative group">
+            <div class="absolute -top-4 -right-4 comic-font text-3xl bg-yellow-300 px-4 py-2 border-4 border-black box-shadow-[4px_4px_0_#000] rotate-6 z-20">€320!</div>
+            <img src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=800&q=80" class="w-full h-64 object-cover border-4 border-black filter contrast-125 saturate-150 mb-4">
+            <span class="inline-block bg-[#ff9900] text-white px-3 py-1 font-black border-2 border-black text-sm uppercase -mt-8 relative z-10 ml-2 shadow-[2px_2px_0_#000]">Fotografie</span>
+            <h3 class="comic-font text-4xl mt-4 leading-tight group-hover:text-[#ff9900] transition-colors">Silent Flow</h3>
+            <button class="w-full border-4 border-black bg-white mt-6 py-2 text-2xl comic-font hover:bg-[#ff9900] hover:text-white hover:translate-y-1 hover:shadow-[0_0_0_#000] shadow-[6px_6px_0_#000] transition-all">BUY NOW</button>
+        </article>    </main>
+</body>
+</html>

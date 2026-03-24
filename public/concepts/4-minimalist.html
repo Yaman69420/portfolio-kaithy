@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Minimalist Zen Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #faf9f6; color: #2c2c2c; font-family: 'Lato', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        .fade-in-up { animation: fadeInUp 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards; opacity: 0; transform: translateY(30px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .art-hover img { transition: transform 0.8s ease; }
+        .art-hover:hover img { transform: scale(1.05); }
+    </style>
+</head>
+<body class="p-6 md:p-24 max-w-7xl mx-auto">
+    <header class="flex flex-col items-center mb-24 fade-in-up text-center">
+        <h1 class="text-6xl md:text-8xl font-normal tracking-tight mb-8">Kaithy</h1>
+        <nav class="flex space-x-12 text-sm uppercase tracking-[0.2em] text-gray-400">
+            <a href="#" class="text-black border-b border-black pb-1">Exhibition</a>
+            <a href="#" class="hover:text-black transition-colors">Studio</a>
+            <a href="#" class="hover:text-black transition-colors">Contact</a>
+        </nav>
+    </header>
+    <main class="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-32">        <article class="fade-in-up art-hover group cursor-pointer " style="animation-delay: 0s;">
+            <div class="overflow-hidden mb-8">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&q=80" class="w-full h-[32rem] object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+            </div>
+            <div class="flex justify-between items-baseline">
+                <div>
+                    <h3 class="serif text-3xl mb-2">Neon Dreams</h3>
+                    <p class="text-sm text-gray-400 tracking-widest uppercase">Digitale Kunst</p>
+                </div>
+                <span class="serif text-xl italic text-gray-500">€450</span>
+            </div>
+        </article>        <article class="fade-in-up art-hover group cursor-pointer md:mt-32" style="animation-delay: 0.2s;">
+            <div class="overflow-hidden mb-8">
+                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80" class="w-full h-[32rem] object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+            </div>
+            <div class="flex justify-between items-baseline">
+                <div>
+                    <h3 class="serif text-3xl mb-2">Abstract Echo</h3>
+                    <p class="text-sm text-gray-400 tracking-widest uppercase">Schilderij</p>
+                </div>
+                <span class="serif text-xl italic text-gray-500">€890</span>
+            </div>
+        </article>        <article class="fade-in-up art-hover group cursor-pointer " style="animation-delay: 0.4s;">
+            <div class="overflow-hidden mb-8">
+                <img src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=800&q=80" class="w-full h-[32rem] object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+            </div>
+            <div class="flex justify-between items-baseline">
+                <div>
+                    <h3 class="serif text-3xl mb-2">Silent Flow</h3>
+                    <p class="text-sm text-gray-400 tracking-widest uppercase">Fotografie</p>
+                </div>
+                <span class="serif text-xl italic text-gray-500">€320</span>
+            </div>
+        </article>    </main>
+</body>
+</html>

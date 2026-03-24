@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Y2K Nostalgia Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        body { 
+            background: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(135deg, #00C9FF 0%, #92FE9D 100%);
+            font-family: 'Verdana', sans-serif; color: #fff; min-height: 100vh;
+        }
+        h1, .pixel-font { font-family: 'VT323', monospace; }
+        .y2k-window { 
+            background: silver; color: black; border: 2px solid; 
+            border-top-color: white; border-left-color: white; border-right-color: gray; border-bottom-color: gray;
+        }
+        .y2k-titlebar { 
+            background: linear-gradient(to right, #000080, #1084d0); color: white; padding: 2px 4px; font-weight: bold; font-size: 14px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .y2k-btn {
+            background: silver; border: 2px solid; border-top-color: white; border-left-color: white; border-right-color: gray; border-bottom-color: gray;
+            padding: 2px 8px; font-size: 12px; cursor: pointer; color: black;
+        }
+        .y2k-btn:active { border-top-color: gray; border-left-color: gray; border-right-color: white; border-bottom-color: white; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="y2k-window max-w-5xl mx-auto mb-8">
+        <div class="y2k-titlebar">
+            <span>Welcome_To_KAITHY.exe</span>
+            <div class="space-x-1 flex">
+                <div class="y2k-btn px-2">_</div>
+                <div class="y2k-btn px-2">X</div>
+            </div>
+        </div>
+        <div class="p-4 text-center bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] bg-[#fff]">
+            <h1 class="pixel-font text-6xl text-fuchsia-600 mb-2 drop-shadow-[2px_2px_0_aqua]">~ KAITHY'S CYBER GALLERY ~</h1>
+            <marquee class="pixel-font text-xl text-blue-800 bg-yellow-200 border border-black p-1">>>> LATEST ARTWORKS UPLOADED! WELCOME TO THE YEAR 2000! <<<</marquee>
+        </div>
+        <div class="bg-gray-200 p-2 flex gap-4 border-t-2 border-white">
+            <button class="y2k-btn font-bold flex items-center gap-2"><img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" width="16"> GALLERY.HTML</button>
+            <button class="y2k-btn flex items-center gap-2"><img src="https://win98icons.alexmeub.com/icons/png/address_book_user-0.png" width="16"> GUESTBOOK.HTM</button>
+        </div>
+    </div>
+
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">        <div class="y2k-window">
+            <div class="y2k-titlebar">
+                <span>ART_0.JPG</span>
+            </div>
+            <div class="p-2 bg-gray-100 h-full flex flex-col">
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&q=80" class="w-full h-48 object-cover border-2 border-inset border-gray-400 mb-2">
+                <div class="text-sm">
+                    <p><b>Title:</b> Neon Dreams</p>
+                    <p><b>Type:</b> Digitale Kunst</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="pixel-font text-2xl text-green-700">€450</span>
+                        <button class="y2k-btn">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </div>        <div class="y2k-window">
+            <div class="y2k-titlebar">
+                <span>ART_1.JPG</span>
+            </div>
+            <div class="p-2 bg-gray-100 h-full flex flex-col">
+                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80" class="w-full h-48 object-cover border-2 border-inset border-gray-400 mb-2">
+                <div class="text-sm">
+                    <p><b>Title:</b> Abstract Echo</p>
+                    <p><b>Type:</b> Schilderij</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="pixel-font text-2xl text-green-700">€890</span>
+                        <button class="y2k-btn">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </div>        <div class="y2k-window">
+            <div class="y2k-titlebar">
+                <span>ART_2.JPG</span>
+            </div>
+            <div class="p-2 bg-gray-100 h-full flex flex-col">
+                <img src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=800&q=80" class="w-full h-48 object-cover border-2 border-inset border-gray-400 mb-2">
+                <div class="text-sm">
+                    <p><b>Title:</b> Silent Flow</p>
+                    <p><b>Type:</b> Fotografie</p>
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="pixel-font text-2xl text-green-700">€320</span>
+                        <button class="y2k-btn">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </div>    </div>
+</body>
+</html>

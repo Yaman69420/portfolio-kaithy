@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Glassmorphism Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh; font-family: 'Inter', sans-serif;
+            background-attachment: fixed;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .blob { position: absolute; filter: blur(60px); z-index: -1; opacity: 0.6; }
+    </style>
+</head>
+<body class="p-4 md:p-12 relative overflow-x-hidden">
+    <div class="blob bg-purple-500 w-96 h-96 rounded-full top-0 left-0"></div>
+    <div class="blob bg-blue-500 w-96 h-96 rounded-full bottom-0 right-0"></div>
+    
+    <nav class="glass rounded-full px-8 py-4 mb-16 flex justify-between items-center text-white mix-blend-difference">
+        <h1 class="text-2xl font-light tracking-widest">Kaithy</h1>
+        <div class="space-x-8 text-sm uppercase tracking-widest">
+            <a href="#" class="hover:opacity-70 transition-opacity">Portfolio</a>
+            <a href="#" class="hover:opacity-70 transition-opacity">Contact</a>
+        </div>
+    </nav>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">        <article class="glass rounded-3xl p-4 transition-transform hover:-translate-y-2 duration-300 cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&q=80" class="w-full h-80 object-cover rounded-2xl mb-6 shadow-inner">
+            <div class="px-2 pb-2 text-gray-800">
+                <span class="text-xs uppercase tracking-widest opacity-60">Digitale Kunst</span>
+                <h3 class="text-xl font-medium mt-1 mb-4">Neon Dreams</h3>
+                <div class="flex justify-between items-center border-t border-white/30 pt-4">
+                    <span class="font-light">€450</span>
+                    <button class="bg-white/50 hover:bg-white/80 transition-colors px-6 py-2 rounded-full text-sm backdrop-blur-md">Bekijk</button>
+                </div>
+            </div>
+        </article>        <article class="glass rounded-3xl p-4 transition-transform hover:-translate-y-2 duration-300 cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80" class="w-full h-80 object-cover rounded-2xl mb-6 shadow-inner">
+            <div class="px-2 pb-2 text-gray-800">
+                <span class="text-xs uppercase tracking-widest opacity-60">Schilderij</span>
+                <h3 class="text-xl font-medium mt-1 mb-4">Abstract Echo</h3>
+                <div class="flex justify-between items-center border-t border-white/30 pt-4">
+                    <span class="font-light">€890</span>
+                    <button class="bg-white/50 hover:bg-white/80 transition-colors px-6 py-2 rounded-full text-sm backdrop-blur-md">Bekijk</button>
+                </div>
+            </div>
+        </article>        <article class="glass rounded-3xl p-4 transition-transform hover:-translate-y-2 duration-300 cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=800&q=80" class="w-full h-80 object-cover rounded-2xl mb-6 shadow-inner">
+            <div class="px-2 pb-2 text-gray-800">
+                <span class="text-xs uppercase tracking-widest opacity-60">Fotografie</span>
+                <h3 class="text-xl font-medium mt-1 mb-4">Silent Flow</h3>
+                <div class="flex justify-between items-center border-t border-white/30 pt-4">
+                    <span class="font-light">€320</span>
+                    <button class="bg-white/50 hover:bg-white/80 transition-colors px-6 py-2 rounded-full text-sm backdrop-blur-md">Bekijk</button>
+                </div>
+            </div>
+        </article>    </div>
+</body>
+</html>
