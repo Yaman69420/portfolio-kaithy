@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Font Demo — Kaithy Art</title>
 
-    <!-- Space Grotesk + all Google Fonts in one request -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bebas+Neue&family=Orbitron:wght@700&family=Righteous&family=Syne+Mono&family=Boogaloo&family=Lilita+One&family=Fredoka+One&family=Russo+One&family=Alfa+Slab+One&family=Titan+One&family=Permanent+Marker&family=Staatliches&display=swap" rel="stylesheet">
 
 <style>
 /* ── Theme ── */
-:root {
-    --c1:#e03a3e; --c2:#0d5c9c; --c3:#f7b11c;   /* palette colours */
-}
+:root { --c1:#e03a3e; --c2:#0d5c9c; --c3:#f7b11c; }
 [data-theme="light"] { --bg:#f4f4f4; --surface:#ffffff; --text:#1a1a1a; --border:#1a1a1a; --muted:rgba(26,26,26,.45); }
 [data-theme="dark"]  { --bg:#1a1a1a; --surface:#2a2a2a; --text:#f4f4f4; --border:#f4f4f4; --muted:rgba(244,244,244,.4); }
 
@@ -25,20 +22,15 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 /* ── Top bar ── */
 .topbar {
     position:sticky; top:0; z-index:50;
-    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+    display:flex; align-items:center; gap:14px;
     padding:0 20px; height:48px;
     background:var(--bg); border-bottom:2px solid var(--border);
 }
 .topbar-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; white-space:nowrap; }
+.topbar-divider { width:1px; height:20px; background:var(--border); opacity:.3; flex-shrink:0; }
 
-/* ── Palette selector in topbar ── */
-.palette-bar {
-    display:flex; align-items:center; gap:6px; flex:1;
-}
-.palette-label {
-    font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
-    color:var(--muted); white-space:nowrap; margin-right:2px;
-}
+/* ── Palette selector ── */
+.palette-bar { display:flex; align-items:center; gap:5px; }
 .pal-btn {
     display:flex; height:22px; border:2px solid transparent; cursor:pointer;
     padding:0; background:none; transition:border-color .12s, transform .1s;
@@ -46,19 +38,51 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 }
 .pal-btn:hover { transform:scale(1.12); }
 .pal-btn.active { border-color:var(--text); }
-.pal-btn .s { width:14px; height:100%; display:block; }
+.pal-btn .s { width:13px; height:100%; display:block; }
+
+/* ── Animation selector ── */
+.anim-bar { display:flex; align-items:center; gap:5px; }
+.anim-label {
+    font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--muted); white-space:nowrap;
+}
+.anim-btn {
+    padding:4px 9px; border:2px solid var(--border); background:transparent; color:var(--text);
+    font-family:'Space Grotesk',sans-serif; font-size:9px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.08em; cursor:pointer;
+    transition:background .12s, color .12s; white-space:nowrap;
+}
+.anim-btn:hover { background:rgba(128,128,128,.1); }
+.anim-btn.active { background:var(--c1); border-color:var(--c1); color:#fff; }
+
+/* replay button */
+.replay-btn {
+    display:flex; align-items:center; gap:5px;
+    padding:4px 10px; border:2px solid var(--border); background:transparent; color:var(--text);
+    font-family:'Space Grotesk',sans-serif; font-size:9px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.08em; cursor:pointer;
+    transition:background .12s;
+}
+.replay-btn:hover { background:rgba(128,128,128,.1); }
+.replay-btn svg { width:10px; height:10px; }
 
 .topbar-right { display:flex; align-items:center; gap:8px; margin-left:auto; }
 .theme-btn {
     display:flex; align-items:center; gap:6px;
     padding:5px 12px; border:2px solid var(--border); background:transparent; color:var(--text);
-    font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; cursor:pointer;
-    white-space:nowrap;
+    font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700;
+    text-transform:uppercase; letter-spacing:.1em; cursor:pointer; white-space:nowrap;
 }
 .theme-btn svg { width:13px; height:13px; }
 
+/* ── Section labels ── */
+.bar-label {
+    font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--muted); white-space:nowrap;
+}
+
 /* ── Layout ── */
-.layout { display:grid; grid-template-columns:280px 1fr; min-height:calc(100vh - 48px); }
+.layout { display:grid; grid-template-columns:260px 1fr; min-height:calc(100vh - 48px); }
 
 /* ── Sidebar ── */
 .sidebar {
@@ -72,16 +96,14 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 }
 .font-btn {
     display:flex; align-items:center; gap:10px; width:100%;
-    padding:12px 16px; border:none; border-bottom:1px solid rgba(128,128,128,.1);
-    background:transparent; cursor:pointer; text-align:left;
-    transition:background .12s;
+    padding:11px 16px; border:none; border-bottom:1px solid rgba(128,128,128,.1);
+    background:transparent; cursor:pointer; text-align:left; transition:background .12s;
 }
 .font-btn:hover { background:rgba(128,128,128,.08); }
 .font-btn.active { background:var(--text); }
 .font-btn.active .btn-name,
 .font-btn.active .btn-number { color:var(--bg) !important; }
 .font-btn.active .btn-src { border-color:var(--bg) !important; color:var(--bg) !important; opacity:.7; }
-
 .btn-number { font-size:9px; font-weight:700; color:var(--muted); font-family:monospace; min-width:18px; }
 .btn-name { font-size:13px; font-weight:700; color:var(--text); flex:1; line-height:1.2; }
 .btn-dafont { font-size:8px; color:var(--muted); display:block; margin-top:1px; }
@@ -93,7 +115,6 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 /* ── Preview pane ── */
 .preview-pane { overflow-y:auto; }
 
-/* Loading overlay */
 .loading {
     display:none; position:absolute; inset:0; z-index:10;
     align-items:center; justify-content:center;
@@ -106,7 +127,7 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 /* ── Homepage preview ── */
 .preview { background:var(--bg); }
 
-.p-colourbar { display:flex; height:5px; }
+.p-colourbar { display:flex; height:5px; overflow:hidden; }
 .p-colourbar .r { background:var(--c1); flex:4; }
 .p-colourbar .y { background:var(--c3); flex:3; }
 .p-colourbar .b { background:var(--c2); flex:5; }
@@ -130,7 +151,7 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 .p-desc { font-size:14px; max-width:480px; line-height:1.7; color:var(--text); opacity:.65; margin-bottom:36px; }
 
 .p-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
-.p-filter { padding:7px 16px; border:2px solid var(--border); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; background:transparent; color:var(--text); cursor:default; }
+.p-filter { padding:7px 16px; border:2px solid var(--border); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; background:transparent; color:var(--text); }
 .p-filter.active { background:var(--text); color:var(--bg); }
 
 .p-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:16px; }
@@ -152,34 +173,112 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 .p-price { font-size:13px; font-weight:700; color:var(--text); }
 .p-status { font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; border:2px solid var(--border); padding:2px 7px; color:var(--text); }
 
-/* ── Font info bar ── */
 .font-info-bar {
     padding:12px 40px; border-bottom:2px solid var(--border);
-    display:flex; align-items:center; gap:16px;
-    background:var(--surface);
+    display:flex; align-items:center; gap:16px; background:var(--surface);
 }
 .fi-name { font-size:18px; font-weight:700; text-transform:uppercase; letter-spacing:-.01em; color:var(--text); }
 .fi-dafont { font-size:10px; color:var(--muted); }
 .fi-src { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:3px 8px; border:1px solid; }
 .fi-preview { font-size:22px; margin-left:auto; color:var(--muted); }
 
-/* ── Palette name toast ── */
+/* ── Toast ── */
 .pal-toast {
     position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(40px);
     background:var(--text); color:var(--bg);
     font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.14em;
     padding:8px 20px; opacity:0; pointer-events:none;
-    transition:opacity .2s, transform .2s;
-    z-index:999;
+    transition:opacity .2s, transform .2s; z-index:999;
 }
 .pal-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
+/* ══════════════════════════════════════════════════════════════════
+   ANIMATION KEYFRAMES
+   ══════════════════════════════════════════════════════════════════ */
+
+/* 1. Fade */
+@keyframes kFade { from { opacity:0; } to { opacity:1; } }
+.anim-fade .p-nav,
+.anim-fade .p-body,
+.anim-fade .font-info-bar { opacity:0; animation: kFade .7s ease forwards; }
+.anim-fade .p-colourbar { opacity:0; animation: kFade .3s ease forwards; }
+.anim-fade .p-nav        { animation-delay: .1s; }
+.anim-fade .p-body       { animation-delay: .3s; }
+.anim-fade .font-info-bar{ animation-delay: .5s; }
+
+/* 2. Slide omhoog */
+@keyframes kSlideUp { from { opacity:0; transform:translateY(36px); } to { opacity:1; transform:translateY(0); } }
+.anim-slide .p-colourbar  { animation: kSlideUp .5s cubic-bezier(.25,.8,.25,1) forwards; }
+.anim-slide .p-nav        { opacity:0; animation: kSlideUp .5s cubic-bezier(.25,.8,.25,1) .15s forwards; }
+.anim-slide .font-info-bar{ opacity:0; animation: kSlideUp .5s cubic-bezier(.25,.8,.25,1) .25s forwards; }
+.anim-slide .p-h1         { opacity:0; animation: kSlideUp .6s cubic-bezier(.25,.8,.25,1) .3s forwards; }
+.anim-slide .p-strips     { opacity:0; animation: kSlideUp .5s .4s forwards; }
+.anim-slide .p-desc       { opacity:0; animation: kSlideUp .5s .45s forwards; }
+.anim-slide .p-filters    { opacity:0; animation: kSlideUp .5s .5s forwards; }
+.anim-slide .p-large      { opacity:0; animation: kSlideUp .6s cubic-bezier(.25,.8,.25,1) .55s forwards; }
+.anim-slide .p-small      { opacity:0; animation: kSlideUp .6s cubic-bezier(.25,.8,.25,1) .65s forwards; }
+
+/* 3. Stagger (cascade, each block pops in) */
+@keyframes kPop { from { opacity:0; transform:translateY(20px) scale(.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+.anim-stagger .p-colourbar  { animation: kPop .4s ease forwards; }
+.anim-stagger .p-nav        { opacity:0; animation: kPop .4s ease .12s forwards; }
+.anim-stagger .font-info-bar{ opacity:0; animation: kPop .4s ease .22s forwards; }
+.anim-stagger .p-h1         { opacity:0; animation: kPop .4s ease .3s forwards; }
+.anim-stagger .p-strips     { opacity:0; animation: kPop .35s ease .4s forwards; }
+.anim-stagger .p-desc       { opacity:0; animation: kPop .35s ease .48s forwards; }
+.anim-stagger .p-filter:nth-child(1) { opacity:0; animation: kPop .3s ease .55s forwards; }
+.anim-stagger .p-filter:nth-child(2) { opacity:0; animation: kPop .3s ease .62s forwards; }
+.anim-stagger .p-filter:nth-child(3) { opacity:0; animation: kPop .3s ease .69s forwards; }
+.anim-stagger .p-filter:nth-child(4) { opacity:0; animation: kPop .3s ease .76s forwards; }
+.anim-stagger .p-large      { opacity:0; animation: kPop .45s cubic-bezier(.34,1.56,.64,1) .82s forwards; }
+.anim-stagger .p-small      { opacity:0; animation: kPop .45s cubic-bezier(.34,1.56,.64,1) .94s forwards; }
+
+/* 4. Wipe (colour bar sweeps, then content drops) */
+@keyframes kWipeBar  { from { transform:scaleX(0); transform-origin:left; } to { transform:scaleX(1); transform-origin:left; } }
+@keyframes kWipeDrop { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+.anim-wipe .p-colourbar   { animation: kWipeBar .6s cubic-bezier(.77,0,.18,1) forwards; }
+.anim-wipe .p-colourbar .r { animation: kWipeBar .5s cubic-bezier(.77,0,.18,1) 0s both; }
+.anim-wipe .p-colourbar .y { animation: kWipeBar .5s cubic-bezier(.77,0,.18,1) .08s both; }
+.anim-wipe .p-colourbar .b { animation: kWipeBar .5s cubic-bezier(.77,0,.18,1) .16s both; }
+.anim-wipe .p-nav         { opacity:0; animation: kWipeDrop .5s ease .55s forwards; }
+.anim-wipe .font-info-bar { opacity:0; animation: kWipeDrop .5s ease .65s forwards; }
+.anim-wipe .p-h1          { opacity:0; animation: kWipeDrop .55s ease .72s forwards; }
+.anim-wipe .p-strips      { opacity:0; animation: kWipeDrop .4s ease .82s forwards; }
+.anim-wipe .p-desc        { opacity:0; animation: kWipeDrop .4s ease .88s forwards; }
+.anim-wipe .p-filters     { opacity:0; animation: kWipeDrop .4s ease .94s forwards; }
+.anim-wipe .p-large       { opacity:0; animation: kWipeDrop .5s ease 1.0s forwards; }
+.anim-wipe .p-small       { opacity:0; animation: kWipeDrop .5s ease 1.1s forwards; }
+
+/* 5. Blur in */
+@keyframes kBlur { from { opacity:0; filter:blur(12px); } to { opacity:1; filter:blur(0); } }
+.anim-blur .p-colourbar  { animation: kBlur .5s ease forwards; }
+.anim-blur .p-nav        { opacity:0; animation: kBlur .6s ease .2s forwards; }
+.anim-blur .font-info-bar{ opacity:0; animation: kBlur .6s ease .3s forwards; }
+.anim-blur .p-h1         { opacity:0; animation: kBlur .7s ease .35s forwards; }
+.anim-blur .p-strips     { opacity:0; animation: kBlur .5s ease .45s forwards; }
+.anim-blur .p-desc       { opacity:0; animation: kBlur .5s ease .5s forwards; }
+.anim-blur .p-filters    { opacity:0; animation: kBlur .5s ease .55s forwards; }
+.anim-blur .p-large      { opacity:0; animation: kBlur .7s ease .6s forwards; }
+.anim-blur .p-small      { opacity:0; animation: kBlur .7s ease .72s forwards; }
+
+/* 6. Zoom uit midden */
+@keyframes kZoom { from { opacity:0; transform:scale(.93); } to { opacity:1; transform:scale(1); } }
+.anim-zoom .p-colourbar  { animation: kZoom .5s cubic-bezier(.34,1.2,.64,1) forwards; }
+.anim-zoom .p-nav        { opacity:0; animation: kZoom .55s cubic-bezier(.34,1.2,.64,1) .15s forwards; }
+.anim-zoom .font-info-bar{ opacity:0; animation: kZoom .55s cubic-bezier(.34,1.2,.64,1) .25s forwards; }
+.anim-zoom .p-h1         { opacity:0; animation: kZoom .6s cubic-bezier(.34,1.3,.64,1) .3s forwards; }
+.anim-zoom .p-strips     { opacity:0; animation: kZoom .45s cubic-bezier(.34,1.3,.64,1) .42s forwards; }
+.anim-zoom .p-desc       { opacity:0; animation: kZoom .45s .48s forwards; }
+.anim-zoom .p-filters    { opacity:0; animation: kZoom .45s .54s forwards; }
+.anim-zoom .p-large      { opacity:0; animation: kZoom .6s cubic-bezier(.34,1.25,.64,1) .6s forwards; }
+.anim-zoom .p-small      { opacity:0; animation: kZoom .6s cubic-bezier(.34,1.25,.64,1) .72s forwards; }
+
 @media(max-width:700px){
-    .topbar { height:auto; padding:8px 16px; gap:10px; }
+    .topbar { height:auto; padding:8px 14px; gap:8px; flex-wrap:wrap; }
     .layout { grid-template-columns:1fr; }
     .sidebar { position:static; height:auto; border-right:none; border-bottom:2px solid var(--border); display:flex; flex-wrap:wrap; }
     .sidebar-heading { width:100%; }
-    .font-btn { width:auto; border-bottom:none; border-right:1px solid rgba(128,128,128,.1); padding:8px 12px; }
+    .font-btn { width:auto; border-bottom:none; border-right:1px solid rgba(128,128,128,.1); padding:8px 10px; }
     .p-large,.p-small { grid-column:span 12; }
     .p-h1 { font-size:14vw; }
 }
@@ -187,17 +286,30 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 </head>
 <body>
 
-<!-- Top bar -->
+<!-- ── Top bar ── -->
 <header class="topbar">
-    <span class="topbar-title">Font Demo</span>
+    <span class="topbar-title">Demo</span>
+    <div class="topbar-divider"></div>
 
-    <!-- Palette selector -->
-    <div class="palette-bar">
-        <span class="palette-label">Palet:</span>
-        <div id="paletteBar"></div>
-    </div>
+    <!-- Palette -->
+    <span class="bar-label">Palet:</span>
+    <div class="palette-bar" id="paletteBar"></div>
+    <div class="topbar-divider"></div>
+
+    <!-- Animation -->
+    <span class="bar-label">Animatie:</span>
+    <div class="anim-bar" id="animBar"></div>
 
     <div class="topbar-right">
+        <!-- Replay -->
+        <button class="replay-btn" id="replayBtn" onclick="replayAnim()" title="Animatie opnieuw afspelen">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Replay
+        </button>
+        <!-- Theme -->
         <button class="theme-btn" onclick="toggleTheme()">
             <svg id="iSun" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
@@ -211,12 +323,9 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 </header>
 
 <div class="layout">
-    <!-- Sidebar font selector -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-heading">Kies een font</div>
     </aside>
-
-    <!-- Preview pane -->
     <div class="preview-pane">
         <div class="preview-wrap">
             <div class="loading" id="loading">Font laden...</div>
@@ -225,23 +334,31 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
     </div>
 </div>
 
-<!-- Palette toast notification -->
 <div class="pal-toast" id="palToast"></div>
 
 <script>
-// ── Palettes ────────────────────────────────────────────────────────
+// ── Palettes ───────────────────────────────────────────────────────
 const palettes = [
-    { id:'bauhaus',    name:'Bauhaus',     colors:['#e03a3e','#0d5c9c','#f7b11c'] },
-    { id:'mono',       name:'Mono',        colors:['#222222','#555555','#999999'] },
-    { id:'nature',     name:'Nature',      colors:['#2d6a4f','#52b788','#d4a017'] },
-    { id:'ocean',      name:'Ocean',       colors:['#023e8a','#0096c7','#48cae4'] },
-    { id:'sunset',     name:'Sunset',      colors:['#c1121f','#e85d04','#faa307'] },
-    { id:'neon',       name:'Neon',        colors:['#ff006e','#8338ec','#3a86ff'] },
-    { id:'earth',      name:'Aarde',       colors:['#7c4a03','#bc6c25','#dda15e'] },
-    { id:'pastel',     name:'Pastel',      colors:['#e06c75','#be95c4','#73d2de'] },
+    { id:'bauhaus', name:'Bauhaus', colors:['#e03a3e','#0d5c9c','#f7b11c'] },
+    { id:'mono',    name:'Mono',    colors:['#222222','#555555','#999999'] },
+    { id:'nature',  name:'Nature',  colors:['#2d6a4f','#52b788','#d4a017'] },
+    { id:'ocean',   name:'Ocean',   colors:['#023e8a','#0096c7','#48cae4'] },
+    { id:'sunset',  name:'Sunset',  colors:['#c1121f','#e85d04','#faa307'] },
+    { id:'neon',    name:'Neon',    colors:['#ff006e','#8338ec','#3a86ff'] },
+    { id:'earth',   name:'Aarde',   colors:['#7c4a03','#bc6c25','#dda15e'] },
+    { id:'pastel',  name:'Pastel',  colors:['#e06c75','#be95c4','#73d2de'] },
 ];
 
-let currentPalette = null;
+// ── Animations ────────────────────────────────────────────────────
+const animations = [
+    { id:'none',    name:'Geen'      },
+    { id:'fade',    name:'Fade'      },
+    { id:'slide',   name:'Slide'     },
+    { id:'stagger', name:'Stagger'   },
+    { id:'wipe',    name:'Wipe'      },
+    { id:'blur',    name:'Blur'      },
+    { id:'zoom',    name:'Zoom'      },
+];
 
 // ── Font data ──────────────────────────────────────────────────────
 const fonts = [
@@ -274,7 +391,9 @@ const fonts = [
 ];
 
 const loaded = new Set(['space-grotesk']);
-let currentFont = null;
+let currentFont    = null;
+let currentPalette = null;
+let currentAnim    = 'none';
 
 const imgLarge = 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=900&q=75';
 const imgSmall = 'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=450&q=75';
@@ -284,12 +403,19 @@ const palBar = document.getElementById('paletteBar');
 palBar.style.cssText = 'display:flex;gap:5px;flex-wrap:wrap;';
 palettes.forEach(p => {
     const btn = document.createElement('button');
-    btn.className = 'pal-btn';
-    btn.dataset.id = p.id;
-    btn.title = p.name;
+    btn.className = 'pal-btn'; btn.dataset.id = p.id; btn.title = p.name;
     btn.onclick = () => applyPalette(p.id, true);
     btn.innerHTML = p.colors.map(c => `<span class="s" style="background:${c}"></span>`).join('');
     palBar.appendChild(btn);
+});
+
+// ── Build animation bar ────────────────────────────────────────────
+const animBar = document.getElementById('animBar');
+animations.forEach(a => {
+    const btn = document.createElement('button');
+    btn.className = 'anim-btn'; btn.dataset.id = a.id; btn.textContent = a.name;
+    btn.onclick = () => selectAnim(a.id);
+    animBar.appendChild(btn);
 });
 
 // ── Build sidebar ──────────────────────────────────────────────────
@@ -298,8 +424,7 @@ fonts.forEach((f, i) => {
     const srcClass = {current:'src-cur', cdn:'src-cdn', gf:'src-gf'}[f.source];
     const srcLabel = {current:'Huidig', cdn:'CDNFonts', gf:'Google Fonts'}[f.source];
     const btn = document.createElement('button');
-    btn.className = 'font-btn';
-    btn.dataset.id = f.id;
+    btn.className = 'font-btn'; btn.dataset.id = f.id;
     btn.onclick = () => selectFont(f.id);
     btn.innerHTML = `
         <span class="btn-number">${String(i+1).padStart(2,'0')}</span>
@@ -314,36 +439,39 @@ fonts.forEach((f, i) => {
 // ── Apply palette ──────────────────────────────────────────────────
 let toastTimer = null;
 function applyPalette(id, showToast) {
-    const pal = palettes.find(p => p.id === id);
-    if (!pal) return;
+    const pal = palettes.find(p => p.id === id); if (!pal) return;
     currentPalette = pal;
-
-    // Update CSS vars
     const root = document.documentElement;
     root.style.setProperty('--c1', pal.colors[0]);
     root.style.setProperty('--c2', pal.colors[1]);
     root.style.setProperty('--c3', pal.colors[2]);
-
-    // Update active button state
     document.querySelectorAll('.pal-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
-
-    // Re-render preview with new palette
     if (currentFont) renderPreview(currentFont);
-
-    // Persist
     localStorage.setItem('font-demo-palette', id);
-
-    // Toast
     if (showToast) {
         const toast = document.getElementById('palToast');
         toast.textContent = pal.name;
         toast.classList.add('show');
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
     }
 }
 
-// ── Load CDN font on demand ────────────────────────────────────────
+// ── Select animation ───────────────────────────────────────────────
+function selectAnim(id) {
+    currentAnim = id;
+    document.querySelectorAll('.anim-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+    localStorage.setItem('font-demo-anim', id);
+    if (currentFont) renderPreview(currentFont);
+}
+
+// ── Replay animation ───────────────────────────────────────────────
+function replayAnim() {
+    if (!currentFont || currentAnim === 'none') return;
+    renderPreview(currentFont);
+}
+
+// ── Load CDN font ─────────────────────────────────────────────────
 function loadCdnFont(font) {
     return new Promise(resolve => {
         if (loaded.has(font.id)) { resolve(); return; }
@@ -360,16 +488,15 @@ function loadCdnFont(font) {
 function renderPreview(font) {
     const pal = currentPalette || palettes[0];
     const idx = fonts.indexOf(font);
-    const a1 = pal.colors[idx % 3];
-    const a2 = pal.colors[(idx + 1) % 3];
-
+    const a1  = pal.colors[idx % 3];
+    const a2  = pal.colors[(idx + 1) % 3];
     const srcClass = {current:'src-cur', cdn:'src-cdn', gf:'src-gf'}[font.source];
     const srcLabel = {current:'Huidig font', cdn:'CDNFonts (dafont mirror)', gf:'Google Fonts alternatief'}[font.source];
+    const animClass = currentAnim !== 'none' ? `anim-${currentAnim}` : '';
 
     document.getElementById('preview').innerHTML = `
-        <div class="preview" style="font-family:${font.family}">
+        <div class="preview ${animClass}" style="font-family:${font.family}">
 
-            <!-- Font info bar -->
             <div class="font-info-bar" style="font-family:'Space Grotesk',sans-serif;">
                 <div>
                     <div class="fi-name" style="font-family:${font.family}">${font.name}</div>
@@ -379,10 +506,8 @@ function renderPreview(font) {
                 <span class="fi-preview" style="font-family:${font.family}">KAITHY ART. · Galerij</span>
             </div>
 
-            <!-- Colour bar -->
             <div class="p-colourbar"><div class="r"></div><div class="y"></div><div class="b"></div></div>
 
-            <!-- Nav -->
             <nav class="p-nav">
                 <span class="p-logo">Kaithy</span>
                 <div class="p-nav-links">
@@ -393,7 +518,6 @@ function renderPreview(font) {
                 </div>
             </nav>
 
-            <!-- Body -->
             <div class="p-body">
                 <div class="p-h1">Galerij</div>
                 <div class="p-strips"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
@@ -445,12 +569,10 @@ function renderPreview(font) {
 
 // ── Select font ────────────────────────────────────────────────────
 async function selectFont(id) {
-    const font = fonts.find(f => f.id === id);
-    if (!font || font === currentFont) return;
+    const font = fonts.find(f => f.id === id); if (!font) return;
+    // Allow re-selecting same font to replay animation
     currentFont = font;
-
     document.querySelectorAll('.font-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
-
     const loading = document.getElementById('loading');
     if (font.source === 'cdn' && !loaded.has(id)) {
         loading.classList.add('visible');
@@ -458,7 +580,6 @@ async function selectFont(id) {
         await new Promise(r => setTimeout(r, 180));
         loading.classList.remove('visible');
     }
-
     renderPreview(font);
     localStorage.setItem('font-demo-selected', id);
 }
@@ -478,6 +599,8 @@ function toggleTheme() {
 // ── Init ───────────────────────────────────────────────────────────
 applyTheme(localStorage.getItem('font-demo-theme') || 'dark');
 applyPalette(localStorage.getItem('font-demo-palette') || 'bauhaus', false);
+const savedAnim = localStorage.getItem('font-demo-anim') || 'none';
+selectAnim(savedAnim);
 selectFont(localStorage.getItem('font-demo-selected') || 'space-grotesk');
 </script>
 </body>
