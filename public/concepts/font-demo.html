@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Font Demo — Kaithy Art</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Space Grotesk (Bauhaus baseline) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Fonts from cdnfonts.com (mirrors many dafont.com fonts) -->
+    <link href="https://fonts.cdnfonts.com/css/american-captain" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/evil-empire" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/aurora-2" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/verve" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/bright-2" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/annabel" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/magic-retro" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/vintage-legacy" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/monograph" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/love-craft-2" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/fifties-movies" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/radiora" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/smile-delight" rel="stylesheet">
+
+    <!-- Google Fonts alternatives for fonts not on cdnfonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@700&family=Righteous&family=Syne+Mono&family=Boogaloo&family=Lilita+One&family=Fredoka+One&family=Russo+One&family=Alfa+Slab+One&family=Titan+One&family=Permanent+Marker&family=Staatliches&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --b-red:    #e03a3e;
+            --b-blue:   #0d5c9c;
+            --b-yellow: #f7b11c;
+            --b-bg:     #f4f4f4;
+            --b-text:   #1a1a1a;
+        }
+        body {
+            background-color: var(--b-bg);
+            color: var(--b-text);
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 2rem;
+        }
+        .font-card { border: 2px solid var(--b-text); margin-bottom: 2rem; overflow: hidden; }
+        .font-card-header { background-color: var(--b-text); color: var(--b-bg); padding: 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .font-card-body { padding: 1.5rem; }
+        .font-name-label { font-family: 'Space Grotesk', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; }
+        .font-source-badge { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.2rem 0.5rem; border: 1px solid; }
+        .badge-cdn  { border-color: #f7b11c; color: #f7b11c; }
+        .badge-gf   { border-color: #0d5c9c; color: #0d5c9c; background: rgba(13,92,156,0.1); }
+        .badge-na   { border-color: #999; color: #999; }
+        .preview-xl  { font-size: clamp(3rem, 8vw, 6rem); line-height: 1; font-weight: 700; margin-bottom: 0.5rem; }
+        .preview-nav { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; opacity: 0.7; }
+        .preview-body { font-size: 0.9rem; opacity: 0.55; }
+        .accent-line { height: 3px; width: 3rem; margin: 0.75rem 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Bauhaus colour bar -->
+    <div style="display:flex; height:8px; margin:-2rem -2rem 0; margin-bottom:2rem;">
+        <div style="flex:4; background:#e03a3e;"></div>
+        <div style="flex:3; background:#f7b11c;"></div>
+        <div style="flex:5; background:#0d5c9c;"></div>
+    </div>
+
+    <!-- Page header -->
+    <h1 style="font-size: clamp(3rem, 10vw, 7rem); font-weight:700; text-transform:uppercase; letter-spacing:-0.04em; line-height:1; margin-bottom:0.5rem;">
+        Font Demo
+    </h1>
+    <div style="display:flex; margin-bottom:0.5rem;">
+        <div style="height:6px; width:6rem; background:#e03a3e;"></div>
+        <div style="height:6px; width:4rem; background:#f7b11c;"></div>
+        <div style="height:6px; width:8rem; background:#0d5c9c;"></div>
+    </div>
+    <p style="font-size:0.85rem; opacity:0.6; margin-bottom:0.25rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">
+        Dafont.com categorie 115 · Bauhaus / Art Deco
+    </p>
+    <p style="font-size:0.75rem; opacity:0.45; margin-bottom:3rem; font-weight:400;">
+        Legenda:
+        <span class="font-source-badge badge-cdn" style="display:inline;">CDN</span> = fonts.cdnfonts.com &nbsp;
+        <span class="font-source-badge badge-gf" style="display:inline;">GF</span> = Google Fonts alternatief &nbsp;
+        <span class="font-source-badge badge-na" style="display:inline;">N/A</span> = niet beschikbaar via CDN
+    </p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap:1.5rem;">
+
+        <!-- 1. American Captain -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">American Captain</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'American Captain', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'American Captain', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'American Captain', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 2. Evil Empire -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Evil Empire</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Evil Empire', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Evil Empire', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Evil Empire', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 3. Aurora -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Aurora</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Aurora', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Aurora', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Aurora', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 4. Verve -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Verve</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Verve', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Verve', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Verve', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 5. Annabel -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Annabel</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Annabel', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Annabel', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Annabel', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 6. Magic Retro -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Magic Retro</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Magic Retro', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Magic Retro', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Magic Retro', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 7. Vintage Legacy -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Vintage Legacy</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Vintage Legacy', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Vintage Legacy', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Vintage Legacy', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 8. Smile Delight -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Smile Delight</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Smile Delight', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Smile Delight', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Smile Delight', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 9. Fifties Movies -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Fifties Movies</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Fifties Movies', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Fifties Movies', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Fifties Movies', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 10. Radiora -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Radiora</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Radiora', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Radiora', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Radiora', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 11. Monograph -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Monograph</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Monograph', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Monograph', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Monograph', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 12. Love Craft -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Love Craft</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Love Craft', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Love Craft', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Love Craft', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 13. Bright -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Bright</span>
+                <span class="font-source-badge badge-cdn">CDN</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Bright', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Bright', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Bright', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- ── Google Fonts alternatives ── -->
+
+        <!-- 14. Bebas Neue (vergelijkbaar met Shelten / Modern Prestige) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Bebas Neue <span style="opacity:0.5; font-size:0.6em;">(≈ Shelten)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Bebas Neue', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Bebas Neue', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Bebas Neue', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 15. Orbitron (vergelijkbaar met Kaoly / Bulgia) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Orbitron <span style="opacity:0.5; font-size:0.6em;">(≈ Kaoly)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Orbitron', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Orbitron', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Orbitron', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 16. Staatliches (vergelijkbaar met Winky Milky / Milky Vintage) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Staatliches <span style="opacity:0.5; font-size:0.6em;">(≈ Milky Vintage)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Staatliches', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Staatliches', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Staatliches', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 17. Righteous (vergelijkbaar met Saint Carell) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Righteous <span style="opacity:0.5; font-size:0.6em;">(≈ Saint Carell)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Righteous', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Righteous', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Righteous', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 18. Russo One (vergelijkbaar met Words Taken) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Russo One <span style="opacity:0.5; font-size:0.6em;">(≈ Words Taken)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Russo One', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Russo One', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Russo One', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 19. Fredoka One (vergelijkbaar met Amoria) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Fredoka One <span style="opacity:0.5; font-size:0.6em;">(≈ Amoria)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Fredoka One', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Fredoka One', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Fredoka One', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 20. Alfa Slab One (vergelijkbaar met Brado Quena) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Alfa Slab One <span style="opacity:0.5; font-size:0.6em;">(≈ Brado Quena)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Alfa Slab One', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Alfa Slab One', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Alfa Slab One', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 21. Titan One (vergelijkbaar met Junigarden Swash) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Titan One <span style="opacity:0.5; font-size:0.6em;">(≈ Junigarden Swash)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Titan One', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Titan One', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Titan One', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 22. Permanent Marker (vergelijkbaar met Sissy That Font) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Permanent Marker <span style="opacity:0.5; font-size:0.6em;">(≈ Sissy That Font)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Permanent Marker', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Permanent Marker', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Permanent Marker', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 23. Lilita One (vergelijkbaar met Modern Prestige) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Lilita One <span style="opacity:0.5; font-size:0.6em;">(≈ Modern Prestige)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Lilita One', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#0d5c9c;"></div>
+                <div class="preview-nav" style="font-family:'Lilita One', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Lilita One', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 24. Syne Mono (vergelijkbaar met Bulgia) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Syne Mono <span style="opacity:0.5; font-size:0.6em;">(≈ Bulgia)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Syne Mono', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#f7b11c;"></div>
+                <div class="preview-nav" style="font-family:'Syne Mono', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Syne Mono', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+        <!-- 25. Boogaloo (vergelijkbaar met Kaoly / Winky Milky) -->
+        <div class="font-card">
+            <div class="font-card-header">
+                <span class="font-name-label">Boogaloo <span style="opacity:0.5; font-size:0.6em;">(≈ Winky Milky)</span></span>
+                <span class="font-source-badge badge-gf">GF</span>
+            </div>
+            <div class="font-card-body">
+                <div class="preview-xl" style="font-family:'Boogaloo', sans-serif;">KAITHY ART.</div>
+                <div class="accent-line" style="background:#e03a3e;"></div>
+                <div class="preview-nav" style="font-family:'Boogaloo', sans-serif;">Galerij / Over mij / Contact</div>
+                <div class="preview-body" style="font-family:'Boogaloo', sans-serif;">Een collectie van mijn meest recente werken.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div style="margin-top:3rem; border-top:2px solid var(--b-text); padding-top:1rem; text-align:center; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4;">
+        Kaithy Art — Font Demo · Dafont.com Cat. 115
+    </div>
+
+</body>
+</html>

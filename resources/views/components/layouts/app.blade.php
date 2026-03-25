@@ -8,37 +8,60 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
-    <title>{{ config('app.name', 'Kaithy Portfolio') }}</title>
+    @php use App\Models\SiteSettings; @endphp
+    <title>{{ SiteSettings::get('site_name', config('app.name', 'Kaithy')) }}</title>
 
-    <!-- Fonts -->
+    <!-- Fonts: Space Grotesk (Bauhaus) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Scripts & Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fcfaf7;
-            color: #1a1a1a;
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--b-bg);
+            color: var(--b-text);
         }
-        h1, h2, h3, h4, .serif {
-            font-family: 'Playfair Display', serif;
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
         }
     </style>
+
+    <!-- Dark mode: apply class before paint to avoid flash -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
 </head>
 <body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Bauhaus colour bar -->
+    <div class="flex w-full h-2" aria-hidden="true">
+        <div class="b-red" style="flex: 4"></div>
+        <div class="b-yellow" style="flex: 3"></div>
+        <div class="b-blue" style="flex: 5"></div>
+    </div>
+
     <x-navigation.main />
 
     <main class="flex-grow container mx-auto px-4 py-12">
         {{ $slot }}
     </main>
 
-    <footer class="py-12 border-t border-gray-100 bg-white/50">
-        <div class="container mx-auto px-4 text-center text-sm text-gray-500">
-            <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+    <footer class="py-10 border-t-2" style="border-color: var(--b-border); background-color: var(--b-surface);">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-xs font-bold uppercase tracking-widest" style="color: var(--b-text);">
+                &copy; {{ date('Y') }} {{ SiteSettings::get('site_name', config('app.name')) }}
+            </p>
         </div>
     </footer>
 </body>

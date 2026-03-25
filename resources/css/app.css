@@ -6,6 +6,90 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* ── Bauhaus CSS custom properties ── */
+:root {
+    --b-red:     #e03a3e;
+    --b-blue:    #0d5c9c;
+    --b-yellow:  #f7b11c;
+    --b-bg:      #f4f4f4;
+    --b-text:    #1a1a1a;
+    --b-surface: #ffffff;
+    --b-border:  #1a1a1a;
+}
+
+html.dark {
+    --b-bg:      #1a1a1a;
+    --b-text:    #f4f4f4;
+    --b-surface: #2a2a2a;
+    --b-border:  #f4f4f4;
+}
+
+/* ── Bauhaus utility classes ── */
+.b-red    { background-color: var(--b-red); }
+.b-blue   { background-color: var(--b-blue); }
+.b-yellow { background-color: var(--b-yellow); }
+.b-black  { background-color: var(--b-text); }
+
+.bauhaus-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1rem;
+}
+
+/* ── Dark mode: overrides for hardcoded Tailwind classes in admin views ── */
+html.dark .bg-white          { background-color: var(--b-surface) !important; }
+html.dark .bg-gray-50        { background-color: rgba(255,255,255,0.05) !important; }
+html.dark .bg-gray-100       { background-color: rgba(255,255,255,0.08) !important; }
+html.dark .bg-gray-200       { background-color: rgba(255,255,255,0.12) !important; }
+
+html.dark .text-gray-400     { color: rgba(244,244,244,0.45) !important; }
+html.dark .text-gray-500     { color: rgba(244,244,244,0.55) !important; }
+html.dark .text-gray-600     { color: rgba(244,244,244,0.65) !important; }
+html.dark .text-gray-700     { color: rgba(244,244,244,0.75) !important; }
+html.dark .text-gray-900     { color: var(--b-text) !important; }
+html.dark .text-black        { color: var(--b-text) !important; }
+
+html.dark .border-gray-50    { border-color: rgba(255,255,255,0.07) !important; }
+html.dark .border-gray-100   { border-color: rgba(255,255,255,0.1) !important; }
+html.dark .border-gray-200   { border-color: rgba(255,255,255,0.15) !important; }
+
+/* divide-* uses border on child elements */
+html.dark .divide-gray-50 > * + *  { border-color: rgba(255,255,255,0.07) !important; }
+html.dark .divide-gray-100 > * + * { border-color: rgba(255,255,255,0.1) !important; }
+
+/* hover states */
+html.dark .hover\:bg-gray-50:hover  { background-color: rgba(255,255,255,0.05) !important; }
+html.dark .hover\:bg-gray-100:hover { background-color: rgba(255,255,255,0.08) !important; }
+html.dark .hover\:text-black:hover  { color: var(--b-text) !important; }
+
+/* form inputs */
+html.dark input,
+html.dark textarea,
+html.dark select {
+    background-color: rgba(255,255,255,0.06) !important;
+    color: var(--b-text) !important;
+    border-color: rgba(255,255,255,0.2) !important;
+}
+html.dark input::placeholder,
+html.dark textarea::placeholder { color: rgba(244,244,244,0.3) !important; }
+
+/* file input */
+html.dark .file\:bg-gray-50 { background-color: rgba(255,255,255,0.1) !important; }
+
+/* status badges (gepubliceerd / groen) */
+html.dark .bg-green-50  { background-color: rgba(34,197,94,0.12) !important; }
+html.dark .text-green-700 { color: rgb(134,239,172) !important; }
+html.dark .border-green-100 { border-color: rgba(34,197,94,0.25) !important; }
+
+/* rounded-* → sharp in Bauhaus (optional, keep commented if you want to control per element)
+html.dark .rounded-full { border-radius: 0 !important; }
+html.dark .rounded-2xl  { border-radius: 0 !important; } */
+
+/* ── Dark mode transition ── */
+html {
+    transition: background-color 0.2s ease, color 0.2s ease;
 }

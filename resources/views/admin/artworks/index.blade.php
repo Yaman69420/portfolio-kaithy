@@ -43,11 +43,11 @@
                                 @endif
                             </td>
                             <td class="px-8 py-4">
-                                <div class="flex gap-4">
-                                    <a href="{{ route('admin.artworks.edit', $artwork) }}" class="text-xs uppercase tracking-widest font-bold text-gray-400 hover:text-black transition-colors">Edit</a>
+                                <div class="flex items-center gap-3">
+                                    <a href="{{ route('admin.artworks.edit', $artwork) }}" class="text-xs uppercase tracking-widest font-bold border-2 px-3 py-1.5 transition-colors" style="border-color: var(--b-border); color: var(--b-text);">Bewerk</a>
                                     <form action="{{ route('admin.artworks.destroy', $artwork) }}" method="POST" onsubmit="return confirm('Weet je het zeker?')">
                                         @csrf @method('DELETE')
-                                        <button type="submit" class="text-xs uppercase tracking-widest font-bold text-red-400 hover:text-red-600 transition-colors">Verwijder</button>
+                                        <button type="submit" class="text-xs uppercase tracking-widest font-bold border-2 px-3 py-1.5 transition-colors" style="border-color: #e03a3e; color: #e03a3e;">Verwijder</button>
                                     </form>
                                 </div>
                             </td>

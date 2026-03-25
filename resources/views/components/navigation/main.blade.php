@@ -1,31 +1,81 @@
-<nav x-data="{ open: false }" class="sticky top-0 z-50 bg-[#fcfaf7]/80 backdrop-blur-md border-b border-gray-100">
+<nav x-data="{
+        open: false,
+        darkMode: localStorage.getItem('theme') === 'dark',
+        toggle() {
+            this.darkMode = !this.darkMode;
+            localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
+            document.documentElement.classList.toggle('dark', this.darkMode);
+        }
+     }"
+     class="sticky top-0 z-50 backdrop-blur-md border-b-2"
+     style="background-color: var(--b-bg); border-color: var(--b-border);">
+
     <div class="container mx-auto px-4 h-20 flex items-center justify-between">
-        <a href="/" class="text-2xl font-serif font-semibold tracking-tight">
-            {{ config('app.name', 'Kaithy') }}
+
+        <!-- Logo -->
+        @php use App\Models\SiteSettings; @endphp
+        <a href="/" class="text-xl font-bold uppercase tracking-tighter" style="color: var(--b-text);">
+            {{ SiteSettings::get('site_name', config('app.name', 'Kaithy')) }}
         </a>
 
-        <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide uppercase">
-            <a href="/" class="hover:text-gray-500 transition-colors">Galerij</a>
-            <a href="/over-mij" class="hover:text-gray-500 transition-colors">Over mij</a>
-            <a href="/contact" class="hover:text-gray-500 transition-colors">Contact</a>
-            
+        <!-- Desktop nav -->
+        <div class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase">
+            <a href="/" class="pb-0.5 border-b-2 border-transparent hover:border-[#e03a3e] hover:text-[#e03a3e] transition-colors" style="color: var(--b-text);">Galerij</a>
+            <a href="/over-mij" class="pb-0.5 border-b-2 border-transparent hover:border-[#e03a3e] hover:text-[#e03a3e] transition-colors" style="color: var(--b-text);">Over mij</a>
+            <a href="/contact" class="pb-0.5 border-b-2 border-transparent hover:border-[#e03a3e] hover:text-[#e03a3e] transition-colors" style="color: var(--b-text);">Contact</a>
+
             @auth
                 @if(auth()->user()->is_admin)
-                    <a href="/admin" class="px-4 py-2 bg-black text-white rounded-full text-xs transition-transform hover:scale-105">Admin</a>
+                    <a href="/admin" class="px-4 py-2 font-bold uppercase text-xs border-2 transition-colors"
+                       style="background-color: var(--b-text); color: var(--b-bg); border-color: var(--b-text);">
+                        Admin
+                    </a>
                 @endif
             @endauth
+
+            <!-- Dark/light toggle -->
+            <button @click="toggle()" class="p-2 border-2 transition-colors focus:outline-none"
+                    style="border-color: var(--b-border); color: var(--b-text);"
+                    :title="darkMode ? 'Naar licht thema' : 'Naar donker thema'">
+                <!-- Sun icon (shown in dark mode) -->
+                <svg x-show="darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+                </svg>
+                <!-- Moon icon (shown in light mode) -->
+                <svg x-show="!darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+            </button>
         </div>
 
-        <div class="md:hidden">
-            <button @click="open = !open" class="p-2 focus:outline-none">
-                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                <svg x-show="open" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <!-- Mobile: toggle + hamburger -->
+        <div class="md:hidden flex items-center space-x-2">
+            <button @click="toggle()" class="p-2 border-2 focus:outline-none"
+                    style="border-color: var(--b-border); color: var(--b-text);">
+                <svg x-show="darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+                </svg>
+                <svg x-show="!darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                </svg>
+            </button>
+            <button @click="open = !open" class="p-2 focus:outline-none" style="color: var(--b-text);">
+                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                </svg>
+                <svg x-show="open" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
             </button>
         </div>
     </div>
 
-    <!-- Mobile Menu Overlay -->
-    <div x-show="open" 
+    <!-- Mobile menu -->
+    <div x-show="open"
          x-cloak
          x-transition:enter="transition ease-out duration-200"
          x-transition:enter-start="opacity-0 -translate-y-4"
@@ -33,16 +83,22 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-4"
-         class="md:hidden absolute top-20 left-0 w-full bg-[#fcfaf7] border-b border-gray-100 shadow-xl z-50"
+         class="md:hidden absolute top-full left-0 w-full border-b-2 z-50"
+         style="background-color: var(--b-bg); border-color: var(--b-border);"
          @click.away="open = false">
-        <div class="px-6 py-10 flex flex-col items-center space-y-8 text-lg font-medium tracking-widest uppercase">
-            <a href="/" @click="open = false" class="hover:text-gray-500 transition-colors">Galerij</a>
-            <a href="/over-mij" @click="open = false" class="hover:text-gray-500 transition-colors">Over mij</a>
-            <a href="/contact" @click="open = false" class="hover:text-gray-500 transition-colors">Contact</a>
-            
+        <div class="px-6 py-10 flex flex-col items-center space-y-8 text-sm font-bold tracking-widest uppercase"
+             style="color: var(--b-text);">
+            <a href="/" @click="open = false" class="hover:text-[#e03a3e] transition-colors">Galerij</a>
+            <a href="/over-mij" @click="open = false" class="hover:text-[#e03a3e] transition-colors">Over mij</a>
+            <a href="/contact" @click="open = false" class="hover:text-[#e03a3e] transition-colors">Contact</a>
+
             @auth
                 @if(auth()->user()->is_admin)
-                    <a href="/admin" @click="open = false" class="px-10 py-3 bg-black text-white rounded-full text-sm font-bold">Admin</a>
+                    <a href="/admin" @click="open = false"
+                       class="px-10 py-3 font-bold border-2 text-sm uppercase"
+                       style="background-color: var(--b-text); color: var(--b-bg); border-color: var(--b-text);">
+                        Admin
+                    </a>
                 @endif
             @endauth
         </div>
