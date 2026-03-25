@@ -1,450 +1,387 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="nl" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Font Demo — Kaithy Art</title>
-    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Space Grotesk (Bauhaus baseline) -->
+    <!-- Space Grotesk + all Google Fonts in one request -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Bebas+Neue&family=Orbitron:wght@700&family=Righteous&family=Syne+Mono&family=Boogaloo&family=Lilita+One&family=Fredoka+One&family=Russo+One&family=Alfa+Slab+One&family=Titan+One&family=Permanent+Marker&family=Staatliches&display=swap" rel="stylesheet">
 
-    <!-- Fonts from cdnfonts.com (mirrors many dafont.com fonts) -->
-    <link href="https://fonts.cdnfonts.com/css/american-captain" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/evil-empire" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/aurora-2" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/verve" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/bright-2" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/annabel" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/magic-retro" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/vintage-legacy" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/monograph" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/love-craft-2" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/fifties-movies" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/radiora" rel="stylesheet">
-    <link href="https://fonts.cdnfonts.com/css/smile-delight" rel="stylesheet">
+<style>
+/* ── Theme ── */
+:root { --b-red:#e03a3e; --b-blue:#0d5c9c; --b-yellow:#f7b11c; }
+[data-theme="light"] { --bg:#f4f4f4; --surface:#ffffff; --text:#1a1a1a; --border:#1a1a1a; --muted:rgba(26,26,26,.45); }
+[data-theme="dark"]  { --bg:#1a1a1a; --surface:#2a2a2a; --text:#f4f4f4; --border:#f4f4f4; --muted:rgba(244,244,244,.4); }
 
-    <!-- Google Fonts alternatives for fonts not on cdnfonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@700&family=Righteous&family=Syne+Mono&family=Boogaloo&family=Lilita+One&family=Fredoka+One&family=Russo+One&family=Alfa+Slab+One&family=Titan+One&family=Permanent+Marker&family=Staatliches&display=swap" rel="stylesheet">
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition:background .2s,color .2s; }
 
-    <style>
-        :root {
-            --b-red:    #e03a3e;
-            --b-blue:   #0d5c9c;
-            --b-yellow: #f7b11c;
-            --b-bg:     #f4f4f4;
-            --b-text:   #1a1a1a;
-        }
-        body {
-            background-color: var(--b-bg);
-            color: var(--b-text);
-            font-family: 'Space Grotesk', sans-serif;
-            padding: 2rem;
-        }
-        .font-card { border: 2px solid var(--b-text); margin-bottom: 2rem; overflow: hidden; }
-        .font-card-header { background-color: var(--b-text); color: var(--b-bg); padding: 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; }
-        .font-card-body { padding: 1.5rem; }
-        .font-name-label { font-family: 'Space Grotesk', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; }
-        .font-source-badge { font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.2rem 0.5rem; border: 1px solid; }
-        .badge-cdn  { border-color: #f7b11c; color: #f7b11c; }
-        .badge-gf   { border-color: #0d5c9c; color: #0d5c9c; background: rgba(13,92,156,0.1); }
-        .badge-na   { border-color: #999; color: #999; }
-        .preview-xl  { font-size: clamp(3rem, 8vw, 6rem); line-height: 1; font-weight: 700; margin-bottom: 0.5rem; }
-        .preview-nav { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; opacity: 0.7; }
-        .preview-body { font-size: 0.9rem; opacity: 0.55; }
-        .accent-line { height: 3px; width: 3rem; margin: 0.75rem 0; }
-    </style>
+/* ── Top bar ── */
+.topbar {
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 20px; height:48px;
+    background:var(--bg); border-bottom:2px solid var(--border);
+}
+.topbar-left { display:flex; align-items:center; gap:12px; }
+.topbar-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; }
+.topbar-sub { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); }
+.theme-btn {
+    display:flex; align-items:center; gap:6px;
+    padding:5px 12px; border:2px solid var(--border); background:transparent; color:var(--text);
+    font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; cursor:pointer;
+}
+.theme-btn svg { width:13px; height:13px; }
+
+/* ── Layout ── */
+.layout { display:grid; grid-template-columns:280px 1fr; min-height:calc(100vh - 48px); }
+
+/* ── Sidebar ── */
+.sidebar {
+    border-right:2px solid var(--border);
+    overflow-y:auto; position:sticky; top:48px; height:calc(100vh - 48px);
+    background:var(--bg);
+}
+.sidebar-heading {
+    padding:14px 16px 10px; font-size:9px; font-weight:700; text-transform:uppercase;
+    letter-spacing:.15em; color:var(--muted); border-bottom:1px solid rgba(128,128,128,.15);
+}
+.font-btn {
+    display:flex; align-items:center; gap:10px; width:100%;
+    padding:12px 16px; border:none; border-bottom:1px solid rgba(128,128,128,.1);
+    background:transparent; cursor:pointer; text-align:left;
+    transition:background .12s;
+}
+.font-btn:hover { background:rgba(128,128,128,.08); }
+.font-btn.active { background:var(--text); }
+.font-btn.active .btn-name,
+.font-btn.active .btn-number { color:var(--bg) !important; }
+.font-btn.active .btn-src { border-color:var(--bg) !important; color:var(--bg) !important; opacity:.7; }
+
+.btn-number { font-size:9px; font-weight:700; color:var(--muted); font-family:monospace; min-width:18px; }
+.btn-name { font-size:13px; font-weight:700; color:var(--text); flex:1; line-height:1.2; }
+.btn-dafont { font-size:8px; color:var(--muted); display:block; margin-top:1px; }
+.btn-src { font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:1px 5px; border:1px solid; flex-shrink:0; }
+.src-cur { border-color:#22c55e; color:#22c55e; }
+.src-cdn { border-color:var(--b-yellow); color:var(--b-yellow); }
+.src-gf  { border-color:var(--b-blue); color:var(--b-blue); }
+
+/* ── Preview pane ── */
+.preview-pane { overflow-y:auto; }
+
+/* Loading overlay */
+.loading {
+    display:none; position:absolute; inset:0; z-index:10;
+    align-items:center; justify-content:center;
+    background:var(--bg);
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--muted);
+}
+.loading.visible { display:flex; }
+.preview-wrap { position:relative; }
+
+/* ── Homepage preview ── */
+.preview { background:var(--bg); }
+
+.p-colourbar { display:flex; height:5px; }
+.p-colourbar .r { background:var(--b-red); flex:4; }
+.p-colourbar .y { background:var(--b-yellow); flex:3; }
+.p-colourbar .b { background:var(--b-blue); flex:5; }
+
+.p-nav {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 40px; height:64px; border-bottom:2px solid var(--border); background:var(--bg);
+}
+.p-logo { font-size:18px; font-weight:700; text-transform:uppercase; letter-spacing:-.02em; color:var(--text); }
+.p-nav-links { display:flex; align-items:center; gap:32px; }
+.p-nav-link { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--text); opacity:.85; }
+.p-admin { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:7px 16px; border:2px solid var(--border); background:var(--text); color:var(--bg); }
+
+.p-body { padding:56px 40px 64px; }
+
+.p-h1 { font-size:clamp(60px,9vw,120px); font-weight:700; text-transform:uppercase; letter-spacing:-.03em; line-height:.9; color:var(--text); }
+.p-strips { display:flex; height:7px; margin:18px 0 20px; }
+.p-strips .s1 { background:var(--b-red); width:80px; }
+.p-strips .s2 { background:var(--b-yellow); width:56px; }
+.p-strips .s3 { background:var(--b-blue); width:120px; }
+.p-desc { font-size:14px; max-width:480px; line-height:1.7; color:var(--text); opacity:.65; margin-bottom:36px; }
+
+.p-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
+.p-filter { padding:7px 16px; border:2px solid var(--border); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; background:transparent; color:var(--text); cursor:default; }
+.p-filter.active { background:var(--text); color:var(--bg); }
+
+.p-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:16px; }
+.p-large { grid-column:span 8; }
+.p-small { grid-column:span 4; }
+
+.p-card { background:var(--surface); position:relative; overflow:hidden; }
+.p-card-circle { position:absolute; top:-14px; left:-14px; width:64px; height:64px; border-radius:50%; pointer-events:none; z-index:1; }
+.p-card img { width:100%; object-fit:cover; display:block; filter:grayscale(100%); transition:filter .4s; position:relative; z-index:2; }
+.p-large img { height:320px; }
+.p-small img { height:192px; }
+.p-card:hover img { filter:grayscale(0%); }
+.p-card-body { padding:16px 20px; position:relative; z-index:2; }
+.p-cat { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; border:2px solid var(--border); padding:2px 7px; color:var(--text); display:inline-block; }
+.p-title { font-size:22px; font-weight:700; text-transform:uppercase; letter-spacing:-.01em; line-height:1.05; margin-top:10px; color:var(--text); }
+.p-large .p-title { font-size:32px; }
+.p-line { height:3px; width:36px; margin:10px 0; }
+.p-meta { display:flex; align-items:center; justify-content:space-between; min-height:26px; }
+.p-price { font-size:13px; font-weight:700; color:var(--text); }
+.p-status { font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; border:2px solid var(--border); padding:2px 7px; color:var(--text); }
+
+/* ── Font info bar ── */
+.font-info-bar {
+    padding:12px 40px; border-bottom:2px solid var(--border);
+    display:flex; align-items:center; gap:16px;
+    background:var(--surface);
+}
+.fi-name { font-size:18px; font-weight:700; text-transform:uppercase; letter-spacing:-.01em; color:var(--text); }
+.fi-dafont { font-size:10px; color:var(--muted); }
+.fi-src { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:3px 8px; border:1px solid; }
+.fi-preview { font-size:22px; margin-left:auto; color:var(--muted); }
+
+@media(max-width:700px){
+    .layout { grid-template-columns:1fr; }
+    .sidebar { position:static; height:auto; border-right:none; border-bottom:2px solid var(--border); display:flex; flex-wrap:wrap; }
+    .sidebar-heading { width:100%; }
+    .font-btn { width:auto; border-bottom:none; border-right:1px solid rgba(128,128,128,.1); padding:8px 12px; }
+    .p-large,.p-small { grid-column:span 12; }
+    .p-h1 { font-size:14vw; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Bauhaus colour bar -->
-    <div style="display:flex; height:8px; margin:-2rem -2rem 0; margin-bottom:2rem;">
-        <div style="flex:4; background:#e03a3e;"></div>
-        <div style="flex:3; background:#f7b11c;"></div>
-        <div style="flex:5; background:#0d5c9c;"></div>
+<!-- Top bar -->
+<header class="topbar">
+    <div class="topbar-left">
+        <span class="topbar-title">Font Demo</span>
+        <span class="topbar-sub">26 fonts · selecteer links</span>
     </div>
+    <button class="theme-btn" onclick="toggleTheme()">
+        <svg id="iSun" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+        </svg>
+        <svg id="iMoon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+        <span id="themeLabel">Light mode</span>
+    </button>
+</header>
 
-    <!-- Page header -->
-    <h1 style="font-size: clamp(3rem, 10vw, 7rem); font-weight:700; text-transform:uppercase; letter-spacing:-0.04em; line-height:1; margin-bottom:0.5rem;">
-        Font Demo
-    </h1>
-    <div style="display:flex; margin-bottom:0.5rem;">
-        <div style="height:6px; width:6rem; background:#e03a3e;"></div>
-        <div style="height:6px; width:4rem; background:#f7b11c;"></div>
-        <div style="height:6px; width:8rem; background:#0d5c9c;"></div>
+<div class="layout">
+    <!-- Sidebar font selector -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-heading">Kies een font</div>
+    </aside>
+
+    <!-- Preview pane -->
+    <div class="preview-pane">
+        <div class="preview-wrap">
+            <div class="loading" id="loading">Font laden...</div>
+            <div id="preview"></div>
+        </div>
     </div>
-    <p style="font-size:0.85rem; opacity:0.6; margin-bottom:0.25rem; text-transform:uppercase; letter-spacing:0.1em; font-weight:700;">
-        Dafont.com categorie 115 · Bauhaus / Art Deco
-    </p>
-    <p style="font-size:0.75rem; opacity:0.45; margin-bottom:3rem; font-weight:400;">
-        Legenda:
-        <span class="font-source-badge badge-cdn" style="display:inline;">CDN</span> = fonts.cdnfonts.com &nbsp;
-        <span class="font-source-badge badge-gf" style="display:inline;">GF</span> = Google Fonts alternatief &nbsp;
-        <span class="font-source-badge badge-na" style="display:inline;">N/A</span> = niet beschikbaar via CDN
-    </p>
+</div>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap:1.5rem;">
+<script>
+// ── Font data ──────────────────────────────────────────────────────
+const fonts = [
+    { id:'space-grotesk',    name:'Space Grotesk',    family:"'Space Grotesk',sans-serif",    source:'current' },
+    { id:'american-captain', name:'American Captain', family:"'American Captain',sans-serif",  source:'cdn', cdn:'american-captain' },
+    { id:'evil-empire',      name:'Evil Empire',      family:"'Evil Empire',sans-serif",       source:'cdn', cdn:'evil-empire' },
+    { id:'aurora',           name:'Aurora',           family:"'Aurora',sans-serif",            source:'cdn', cdn:'aurora-2' },
+    { id:'bebas-neue',       name:'Bebas Neue',       family:"'Bebas Neue',sans-serif",        source:'gf',  dafont:'Shelten' },
+    { id:'staatliches',      name:'Staatliches',      family:"'Staatliches',sans-serif",       source:'gf',  dafont:'Milky Vintage' },
+    { id:'russo-one',        name:'Russo One',        family:"'Russo One',sans-serif",         source:'gf',  dafont:'Words Taken' },
+    { id:'righteous',        name:'Righteous',        family:"'Righteous',sans-serif",         source:'gf',  dafont:'Saint Carell' },
+    { id:'orbitron',         name:'Orbitron',         family:"'Orbitron',sans-serif",          source:'gf',  dafont:'Kaoly' },
+    { id:'smile-delight',    name:'Smile Delight',    family:"'Smile Delight',sans-serif",     source:'cdn', cdn:'smile-delight' },
+    { id:'vintage-legacy',   name:'Vintage Legacy',   family:"'Vintage Legacy',sans-serif",    source:'cdn', cdn:'vintage-legacy' },
+    { id:'radiora',          name:'Radiora',          family:"'Radiora',sans-serif",           source:'cdn', cdn:'radiora' },
+    { id:'fifties-movies',   name:'Fifties Movies',   family:"'Fifties Movies',sans-serif",    source:'cdn', cdn:'fifties-movies' },
+    { id:'magic-retro',      name:'Magic Retro',      family:"'Magic Retro',sans-serif",       source:'cdn', cdn:'magic-retro' },
+    { id:'monograph',        name:'Monograph',        family:"'Monograph',sans-serif",         source:'cdn', cdn:'monograph' },
+    { id:'love-craft',       name:'Love Craft',       family:"'Love Craft',sans-serif",        source:'cdn', cdn:'love-craft-2' },
+    { id:'verve',            name:'Verve',            family:"'Verve',sans-serif",             source:'cdn', cdn:'verve' },
+    { id:'annabel',          name:'Annabel',          family:"'Annabel',sans-serif",           source:'cdn', cdn:'annabel' },
+    { id:'bright',           name:'Bright',           family:"'Bright',sans-serif",            source:'cdn', cdn:'bright-2' },
+    { id:'titan-one',        name:'Titan One',        family:"'Titan One',sans-serif",         source:'gf',  dafont:'Junigarden Swash' },
+    { id:'lilita-one',       name:'Lilita One',       family:"'Lilita One',sans-serif",        source:'gf',  dafont:'Modern Prestige' },
+    { id:'alfa-slab-one',    name:'Alfa Slab One',    family:"'Alfa Slab One',sans-serif",     source:'gf',  dafont:'Brado Quena' },
+    { id:'fredoka-one',      name:'Fredoka One',      family:"'Fredoka One',sans-serif",       source:'gf',  dafont:'Amoria' },
+    { id:'permanent-marker', name:'Permanent Marker', family:"'Permanent Marker',cursive",     source:'gf',  dafont:'Sissy That Font' },
+    { id:'syne-mono',        name:'Syne Mono',        family:"'Syne Mono',monospace",          source:'gf',  dafont:'Bulgia' },
+    { id:'boogaloo',         name:'Boogaloo',         family:"'Boogaloo',sans-serif",          source:'gf',  dafont:'Winky Milky' },
+];
 
-        <!-- 1. American Captain -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">American Captain</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
+const accents = ['#e03a3e','#0d5c9c','#f7b11c'];
+const loaded = new Set(['space-grotesk']);
+let current = null;
+
+const imgLarge = 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=900&q=75';
+const imgSmall = 'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=450&q=75';
+
+// ── Build sidebar ──────────────────────────────────────────────────
+const sidebar = document.getElementById('sidebar');
+fonts.forEach((f, i) => {
+    const srcClass = {current:'src-cur', cdn:'src-cdn', gf:'src-gf'}[f.source];
+    const srcLabel = {current:'Huidig', cdn:'CDNFonts', gf:'Google Fonts'}[f.source];
+    const btn = document.createElement('button');
+    btn.className = 'font-btn';
+    btn.dataset.id = f.id;
+    btn.onclick = () => selectFont(f.id);
+    btn.innerHTML = `
+        <span class="btn-number">${String(i+1).padStart(2,'0')}</span>
+        <span class="btn-name" style="font-family:${f.family}">${f.name}
+            ${f.dafont ? `<span class="btn-dafont">≈ ${f.dafont}</span>` : ''}
+        </span>
+        <span class="btn-src ${srcClass}">${srcLabel}</span>
+    `;
+    sidebar.appendChild(btn);
+});
+
+// ── Load CDN font on demand ────────────────────────────────────────
+function loadCdnFont(font) {
+    return new Promise(resolve => {
+        if (loaded.has(font.id)) { resolve(); return; }
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = `https://fonts.cdnfonts.com/css/${font.cdn}`;
+        link.onload = () => { loaded.add(font.id); resolve(); };
+        link.onerror = () => { loaded.add(font.id); resolve(); }; // resolve anyway
+        document.head.appendChild(link);
+    });
+}
+
+// ── Render preview ─────────────────────────────────────────────────
+function renderPreview(font) {
+    const a1 = accents[fonts.indexOf(font) % 3];
+    const a2 = accents[(fonts.indexOf(font) + 1) % 3];
+    const srcClass = {current:'src-cur', cdn:'src-cdn', gf:'src-gf'}[font.source];
+    const srcLabel = {current:'Huidig font', cdn:'CDNFonts (dafont mirror)', gf:'Google Fonts alternatief'}[font.source];
+
+    document.getElementById('preview').innerHTML = `
+        <div class="preview" style="font-family:${font.family}">
+
+            <!-- Font info bar -->
+            <div class="font-info-bar" style="font-family:'Space Grotesk',sans-serif;">
+                <div>
+                    <div class="fi-name" style="font-family:${font.family}">${font.name}</div>
+                    ${font.dafont ? `<div class="fi-dafont">≈ ${font.dafont} op dafont.com</div>` : ''}
+                </div>
+                <span class="fi-src ${srcClass}">${srcLabel}</span>
+                <span class="fi-preview" style="font-family:${font.family}">KAITHY ART. · Galerij</span>
             </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'American Captain', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'American Captain', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'American Captain', sans-serif;">Een collectie van mijn meest recente werken.</div>
+
+            <!-- Colour bar -->
+            <div class="p-colourbar"><div class="r"></div><div class="y"></div><div class="b"></div></div>
+
+            <!-- Nav -->
+            <nav class="p-nav">
+                <span class="p-logo">Kaithy</span>
+                <div class="p-nav-links">
+                    <span class="p-nav-link">Galerij</span>
+                    <span class="p-nav-link">Over mij</span>
+                    <span class="p-nav-link">Contact</span>
+                    <span class="p-admin">Admin</span>
+                </div>
+            </nav>
+
+            <!-- Body -->
+            <div class="p-body">
+                <div class="p-h1">Galerij</div>
+                <div class="p-strips"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
+                <p class="p-desc">Een collectie van mijn meest recente werken, variërend van olieverfschilderijen tot abstracte sculpturen.</p>
+
+                <div class="p-filters">
+                    <button class="p-filter active">Alles</button>
+                    <button class="p-filter">Schilderijen</button>
+                    <button class="p-filter">Sculpturen</button>
+                    <button class="p-filter">Katten</button>
+                </div>
+
+                <div class="p-grid">
+                    <div class="p-large">
+                        <div class="p-card">
+                            <div class="p-card-circle" style="background:${a1}"></div>
+                            <img src="${imgLarge}" alt="" loading="lazy">
+                            <div class="p-card-body">
+                                <span class="p-cat">Schilderijen</span>
+                                <div class="p-title">Abstract Echo</div>
+                                <div class="p-line" style="background:${a1}"></div>
+                                <div class="p-meta">
+                                    <span class="p-price">€890,00</span>
+                                    <span class="p-status">Beschikbaar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-small">
+                        <div class="p-card">
+                            <div class="p-card-circle" style="background:${a2}"></div>
+                            <img src="${imgSmall}" alt="" loading="lazy">
+                            <div class="p-card-body">
+                                <span class="p-cat">Katten</span>
+                                <div class="p-title">Kat</div>
+                                <div class="p-line" style="background:${a2}"></div>
+                                <div class="p-meta">
+                                    <span class="p-price">€50,00</span>
+                                    <span class="p-status">Gereserveerd</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    `;
+}
 
-        <!-- 2. Evil Empire -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Evil Empire</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Evil Empire', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Evil Empire', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Evil Empire', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
+// ── Select font ────────────────────────────────────────────────────
+async function selectFont(id) {
+    const font = fonts.find(f => f.id === id);
+    if (!font || font === current) return;
+    current = font;
 
-        <!-- 3. Aurora -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Aurora</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Aurora', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Aurora', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Aurora', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
+    // Update active button
+    document.querySelectorAll('.font-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
 
-        <!-- 4. Verve -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Verve</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Verve', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Verve', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Verve', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
+    // Show loading for CDN fonts that haven't been loaded yet
+    const loading = document.getElementById('loading');
+    if (font.source === 'cdn' && !loaded.has(id)) {
+        loading.classList.add('visible');
+        await loadCdnFont(font);
+        // Small wait for font to paint
+        await new Promise(r => setTimeout(r, 180));
+        loading.classList.remove('visible');
+    }
 
-        <!-- 5. Annabel -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Annabel</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Annabel', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Annabel', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Annabel', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
+    renderPreview(font);
 
-        <!-- 6. Magic Retro -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Magic Retro</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Magic Retro', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Magic Retro', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Magic Retro', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
+    // Save selection
+    localStorage.setItem('font-demo-selected', id);
+}
 
-        <!-- 7. Vintage Legacy -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Vintage Legacy</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Vintage Legacy', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Vintage Legacy', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Vintage Legacy', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
+// ── Theme toggle ───────────────────────────────────────────────────
+function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('iSun').style.display  = t==='dark' ? 'block' : 'none';
+    document.getElementById('iMoon').style.display = t==='dark' ? 'none' : 'block';
+    document.getElementById('themeLabel').textContent = t==='dark' ? 'Light mode' : 'Dark mode';
+    localStorage.setItem('font-demo-theme', t);
+}
+function toggleTheme() {
+    applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
 
-        <!-- 8. Smile Delight -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Smile Delight</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Smile Delight', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Smile Delight', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Smile Delight', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 9. Fifties Movies -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Fifties Movies</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Fifties Movies', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Fifties Movies', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Fifties Movies', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 10. Radiora -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Radiora</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Radiora', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Radiora', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Radiora', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 11. Monograph -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Monograph</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Monograph', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Monograph', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Monograph', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 12. Love Craft -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Love Craft</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Love Craft', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Love Craft', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Love Craft', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 13. Bright -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Bright</span>
-                <span class="font-source-badge badge-cdn">CDN</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Bright', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Bright', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Bright', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- ── Google Fonts alternatives ── -->
-
-        <!-- 14. Bebas Neue (vergelijkbaar met Shelten / Modern Prestige) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Bebas Neue <span style="opacity:0.5; font-size:0.6em;">(≈ Shelten)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Bebas Neue', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Bebas Neue', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Bebas Neue', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 15. Orbitron (vergelijkbaar met Kaoly / Bulgia) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Orbitron <span style="opacity:0.5; font-size:0.6em;">(≈ Kaoly)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Orbitron', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Orbitron', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Orbitron', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 16. Staatliches (vergelijkbaar met Winky Milky / Milky Vintage) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Staatliches <span style="opacity:0.5; font-size:0.6em;">(≈ Milky Vintage)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Staatliches', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Staatliches', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Staatliches', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 17. Righteous (vergelijkbaar met Saint Carell) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Righteous <span style="opacity:0.5; font-size:0.6em;">(≈ Saint Carell)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Righteous', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Righteous', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Righteous', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 18. Russo One (vergelijkbaar met Words Taken) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Russo One <span style="opacity:0.5; font-size:0.6em;">(≈ Words Taken)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Russo One', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Russo One', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Russo One', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 19. Fredoka One (vergelijkbaar met Amoria) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Fredoka One <span style="opacity:0.5; font-size:0.6em;">(≈ Amoria)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Fredoka One', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Fredoka One', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Fredoka One', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 20. Alfa Slab One (vergelijkbaar met Brado Quena) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Alfa Slab One <span style="opacity:0.5; font-size:0.6em;">(≈ Brado Quena)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Alfa Slab One', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Alfa Slab One', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Alfa Slab One', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 21. Titan One (vergelijkbaar met Junigarden Swash) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Titan One <span style="opacity:0.5; font-size:0.6em;">(≈ Junigarden Swash)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Titan One', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Titan One', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Titan One', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 22. Permanent Marker (vergelijkbaar met Sissy That Font) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Permanent Marker <span style="opacity:0.5; font-size:0.6em;">(≈ Sissy That Font)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Permanent Marker', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Permanent Marker', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Permanent Marker', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 23. Lilita One (vergelijkbaar met Modern Prestige) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Lilita One <span style="opacity:0.5; font-size:0.6em;">(≈ Modern Prestige)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Lilita One', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#0d5c9c;"></div>
-                <div class="preview-nav" style="font-family:'Lilita One', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Lilita One', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 24. Syne Mono (vergelijkbaar met Bulgia) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Syne Mono <span style="opacity:0.5; font-size:0.6em;">(≈ Bulgia)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Syne Mono', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#f7b11c;"></div>
-                <div class="preview-nav" style="font-family:'Syne Mono', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Syne Mono', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-        <!-- 25. Boogaloo (vergelijkbaar met Kaoly / Winky Milky) -->
-        <div class="font-card">
-            <div class="font-card-header">
-                <span class="font-name-label">Boogaloo <span style="opacity:0.5; font-size:0.6em;">(≈ Winky Milky)</span></span>
-                <span class="font-source-badge badge-gf">GF</span>
-            </div>
-            <div class="font-card-body">
-                <div class="preview-xl" style="font-family:'Boogaloo', sans-serif;">KAITHY ART.</div>
-                <div class="accent-line" style="background:#e03a3e;"></div>
-                <div class="preview-nav" style="font-family:'Boogaloo', sans-serif;">Galerij / Over mij / Contact</div>
-                <div class="preview-body" style="font-family:'Boogaloo', sans-serif;">Een collectie van mijn meest recente werken.</div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div style="margin-top:3rem; border-top:2px solid var(--b-text); padding-top:1rem; text-align:center; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; opacity:0.4;">
-        Kaithy Art — Font Demo · Dafont.com Cat. 115
-    </div>
-
+// ── Init ───────────────────────────────────────────────────────────
+applyTheme(localStorage.getItem('font-demo-theme') || 'dark');
+const savedFont = localStorage.getItem('font-demo-selected') || 'space-grotesk';
+selectFont(savedFont);
+</script>
 </body>
 </html>
