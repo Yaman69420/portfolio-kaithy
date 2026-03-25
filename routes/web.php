@@ -9,13 +9,13 @@ Route::get('/', [ArtworkController::class, 'index'])->name('artworks.index');
 Route::get('/artworks/{artwork:slug}', [ArtworkController::class, 'show'])->name('artworks.show');
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:3,1')->name('contact.store');
 
 Route::view('/over-mij', 'over-mij')->name('over-mij');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1')->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin routes

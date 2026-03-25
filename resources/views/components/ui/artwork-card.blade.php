@@ -18,6 +18,8 @@
             @if($artwork->hasMedia('artworks'))
                 <img src="{{ $artwork->getFirstMediaUrl('artworks', 'optimized') }}"
                      alt="{{ $artwork->title }}"
+                     loading="lazy"
+                     decoding="async"
                      class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
             @else
                 <div class="w-full h-full flex items-center justify-center" style="background-color: var(--b-surface);">

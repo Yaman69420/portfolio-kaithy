@@ -6,12 +6,14 @@
 .phpactor.json
 .phpunit.result.cache
 /.fleet
+/.gemini
 /.idea
 /.nova
 /.phpunit.cache
 /.vscode
 /.zed
 /auth.json
+/hot
 /node_modules
 /public/build
 /public/hot
@@ -19,6 +21,8 @@
 /storage/*.key
 /storage/pail
 /vendor
+GEMINI.md
+generate_concepts.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
