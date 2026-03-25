@@ -12,7 +12,9 @@
 
 <style>
 /* ── Theme ── */
-:root { --b-red:#e03a3e; --b-blue:#0d5c9c; --b-yellow:#f7b11c; }
+:root {
+    --c1:#e03a3e; --c2:#0d5c9c; --c3:#f7b11c;   /* palette colours */
+}
 [data-theme="light"] { --bg:#f4f4f4; --surface:#ffffff; --text:#1a1a1a; --border:#1a1a1a; --muted:rgba(26,26,26,.45); }
 [data-theme="dark"]  { --bg:#1a1a1a; --surface:#2a2a2a; --text:#f4f4f4; --border:#f4f4f4; --muted:rgba(244,244,244,.4); }
 
@@ -23,17 +25,35 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 /* ── Top bar ── */
 .topbar {
     position:sticky; top:0; z-index:50;
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
     padding:0 20px; height:48px;
     background:var(--bg); border-bottom:2px solid var(--border);
 }
-.topbar-left { display:flex; align-items:center; gap:12px; }
-.topbar-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; }
-.topbar-sub { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); }
+.topbar-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; white-space:nowrap; }
+
+/* ── Palette selector in topbar ── */
+.palette-bar {
+    display:flex; align-items:center; gap:6px; flex:1;
+}
+.palette-label {
+    font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--muted); white-space:nowrap; margin-right:2px;
+}
+.pal-btn {
+    display:flex; height:22px; border:2px solid transparent; cursor:pointer;
+    padding:0; background:none; transition:border-color .12s, transform .1s;
+    border-radius:2px; overflow:hidden; flex-shrink:0;
+}
+.pal-btn:hover { transform:scale(1.12); }
+.pal-btn.active { border-color:var(--text); }
+.pal-btn .s { width:14px; height:100%; display:block; }
+
+.topbar-right { display:flex; align-items:center; gap:8px; margin-left:auto; }
 .theme-btn {
     display:flex; align-items:center; gap:6px;
     padding:5px 12px; border:2px solid var(--border); background:transparent; color:var(--text);
     font-family:'Space Grotesk',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; cursor:pointer;
+    white-space:nowrap;
 }
 .theme-btn svg { width:13px; height:13px; }
 
@@ -67,8 +87,8 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 .btn-dafont { font-size:8px; color:var(--muted); display:block; margin-top:1px; }
 .btn-src { font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:1px 5px; border:1px solid; flex-shrink:0; }
 .src-cur { border-color:#22c55e; color:#22c55e; }
-.src-cdn { border-color:var(--b-yellow); color:var(--b-yellow); }
-.src-gf  { border-color:var(--b-blue); color:var(--b-blue); }
+.src-cdn { border-color:var(--c3); color:var(--c3); }
+.src-gf  { border-color:var(--c2); color:var(--c2); }
 
 /* ── Preview pane ── */
 .preview-pane { overflow-y:auto; }
@@ -87,9 +107,9 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 .preview { background:var(--bg); }
 
 .p-colourbar { display:flex; height:5px; }
-.p-colourbar .r { background:var(--b-red); flex:4; }
-.p-colourbar .y { background:var(--b-yellow); flex:3; }
-.p-colourbar .b { background:var(--b-blue); flex:5; }
+.p-colourbar .r { background:var(--c1); flex:4; }
+.p-colourbar .y { background:var(--c3); flex:3; }
+.p-colourbar .b { background:var(--c2); flex:5; }
 
 .p-nav {
     display:flex; align-items:center; justify-content:space-between;
@@ -104,9 +124,9 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 
 .p-h1 { font-size:clamp(60px,9vw,120px); font-weight:700; text-transform:uppercase; letter-spacing:-.03em; line-height:.9; color:var(--text); }
 .p-strips { display:flex; height:7px; margin:18px 0 20px; }
-.p-strips .s1 { background:var(--b-red); width:80px; }
-.p-strips .s2 { background:var(--b-yellow); width:56px; }
-.p-strips .s3 { background:var(--b-blue); width:120px; }
+.p-strips .s1 { background:var(--c1); width:80px; }
+.p-strips .s2 { background:var(--c3); width:56px; }
+.p-strips .s3 { background:var(--c2); width:120px; }
 .p-desc { font-size:14px; max-width:480px; line-height:1.7; color:var(--text); opacity:.65; margin-bottom:36px; }
 
 .p-filters { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
@@ -143,7 +163,19 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 .fi-src { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:3px 8px; border:1px solid; }
 .fi-preview { font-size:22px; margin-left:auto; color:var(--muted); }
 
+/* ── Palette name toast ── */
+.pal-toast {
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(40px);
+    background:var(--text); color:var(--bg);
+    font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.14em;
+    padding:8px 20px; opacity:0; pointer-events:none;
+    transition:opacity .2s, transform .2s;
+    z-index:999;
+}
+.pal-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
 @media(max-width:700px){
+    .topbar { height:auto; padding:8px 16px; gap:10px; }
     .layout { grid-template-columns:1fr; }
     .sidebar { position:static; height:auto; border-right:none; border-bottom:2px solid var(--border); display:flex; flex-wrap:wrap; }
     .sidebar-heading { width:100%; }
@@ -157,19 +189,25 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
 
 <!-- Top bar -->
 <header class="topbar">
-    <div class="topbar-left">
-        <span class="topbar-title">Font Demo</span>
-        <span class="topbar-sub">26 fonts · selecteer links</span>
+    <span class="topbar-title">Font Demo</span>
+
+    <!-- Palette selector -->
+    <div class="palette-bar">
+        <span class="palette-label">Palet:</span>
+        <div id="paletteBar"></div>
     </div>
-    <button class="theme-btn" onclick="toggleTheme()">
-        <svg id="iSun" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
-        </svg>
-        <svg id="iMoon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-        </svg>
-        <span id="themeLabel">Light mode</span>
-    </button>
+
+    <div class="topbar-right">
+        <button class="theme-btn" onclick="toggleTheme()">
+            <svg id="iSun" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display:none">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+            </svg>
+            <svg id="iMoon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+            <span id="themeLabel">Light mode</span>
+        </button>
+    </div>
 </header>
 
 <div class="layout">
@@ -187,7 +225,24 @@ body { font-family:'Space Grotesk',sans-serif; background:var(--bg); color:var(-
     </div>
 </div>
 
+<!-- Palette toast notification -->
+<div class="pal-toast" id="palToast"></div>
+
 <script>
+// ── Palettes ────────────────────────────────────────────────────────
+const palettes = [
+    { id:'bauhaus',    name:'Bauhaus',     colors:['#e03a3e','#0d5c9c','#f7b11c'] },
+    { id:'mono',       name:'Mono',        colors:['#222222','#555555','#999999'] },
+    { id:'nature',     name:'Nature',      colors:['#2d6a4f','#52b788','#d4a017'] },
+    { id:'ocean',      name:'Ocean',       colors:['#023e8a','#0096c7','#48cae4'] },
+    { id:'sunset',     name:'Sunset',      colors:['#c1121f','#e85d04','#faa307'] },
+    { id:'neon',       name:'Neon',        colors:['#ff006e','#8338ec','#3a86ff'] },
+    { id:'earth',      name:'Aarde',       colors:['#7c4a03','#bc6c25','#dda15e'] },
+    { id:'pastel',     name:'Pastel',      colors:['#e06c75','#be95c4','#73d2de'] },
+];
+
+let currentPalette = null;
+
 // ── Font data ──────────────────────────────────────────────────────
 const fonts = [
     { id:'space-grotesk',    name:'Space Grotesk',    family:"'Space Grotesk',sans-serif",    source:'current' },
@@ -218,12 +273,24 @@ const fonts = [
     { id:'boogaloo',         name:'Boogaloo',         family:"'Boogaloo',sans-serif",          source:'gf',  dafont:'Winky Milky' },
 ];
 
-const accents = ['#e03a3e','#0d5c9c','#f7b11c'];
 const loaded = new Set(['space-grotesk']);
-let current = null;
+let currentFont = null;
 
 const imgLarge = 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=900&q=75';
 const imgSmall = 'https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=450&q=75';
+
+// ── Build palette bar ──────────────────────────────────────────────
+const palBar = document.getElementById('paletteBar');
+palBar.style.cssText = 'display:flex;gap:5px;flex-wrap:wrap;';
+palettes.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'pal-btn';
+    btn.dataset.id = p.id;
+    btn.title = p.name;
+    btn.onclick = () => applyPalette(p.id, true);
+    btn.innerHTML = p.colors.map(c => `<span class="s" style="background:${c}"></span>`).join('');
+    palBar.appendChild(btn);
+});
 
 // ── Build sidebar ──────────────────────────────────────────────────
 const sidebar = document.getElementById('sidebar');
@@ -244,6 +311,38 @@ fonts.forEach((f, i) => {
     sidebar.appendChild(btn);
 });
 
+// ── Apply palette ──────────────────────────────────────────────────
+let toastTimer = null;
+function applyPalette(id, showToast) {
+    const pal = palettes.find(p => p.id === id);
+    if (!pal) return;
+    currentPalette = pal;
+
+    // Update CSS vars
+    const root = document.documentElement;
+    root.style.setProperty('--c1', pal.colors[0]);
+    root.style.setProperty('--c2', pal.colors[1]);
+    root.style.setProperty('--c3', pal.colors[2]);
+
+    // Update active button state
+    document.querySelectorAll('.pal-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
+
+    // Re-render preview with new palette
+    if (currentFont) renderPreview(currentFont);
+
+    // Persist
+    localStorage.setItem('font-demo-palette', id);
+
+    // Toast
+    if (showToast) {
+        const toast = document.getElementById('palToast');
+        toast.textContent = pal.name;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+}
+
 // ── Load CDN font on demand ────────────────────────────────────────
 function loadCdnFont(font) {
     return new Promise(resolve => {
@@ -252,15 +351,18 @@ function loadCdnFont(font) {
         link.rel = 'stylesheet';
         link.href = `https://fonts.cdnfonts.com/css/${font.cdn}`;
         link.onload = () => { loaded.add(font.id); resolve(); };
-        link.onerror = () => { loaded.add(font.id); resolve(); }; // resolve anyway
+        link.onerror = () => { loaded.add(font.id); resolve(); };
         document.head.appendChild(link);
     });
 }
 
 // ── Render preview ─────────────────────────────────────────────────
 function renderPreview(font) {
-    const a1 = accents[fonts.indexOf(font) % 3];
-    const a2 = accents[(fonts.indexOf(font) + 1) % 3];
+    const pal = currentPalette || palettes[0];
+    const idx = fonts.indexOf(font);
+    const a1 = pal.colors[idx % 3];
+    const a2 = pal.colors[(idx + 1) % 3];
+
     const srcClass = {current:'src-cur', cdn:'src-cdn', gf:'src-gf'}[font.source];
     const srcLabel = {current:'Huidig font', cdn:'CDNFonts (dafont mirror)', gf:'Google Fonts alternatief'}[font.source];
 
@@ -344,25 +446,20 @@ function renderPreview(font) {
 // ── Select font ────────────────────────────────────────────────────
 async function selectFont(id) {
     const font = fonts.find(f => f.id === id);
-    if (!font || font === current) return;
-    current = font;
+    if (!font || font === currentFont) return;
+    currentFont = font;
 
-    // Update active button
     document.querySelectorAll('.font-btn').forEach(b => b.classList.toggle('active', b.dataset.id === id));
 
-    // Show loading for CDN fonts that haven't been loaded yet
     const loading = document.getElementById('loading');
     if (font.source === 'cdn' && !loaded.has(id)) {
         loading.classList.add('visible');
         await loadCdnFont(font);
-        // Small wait for font to paint
         await new Promise(r => setTimeout(r, 180));
         loading.classList.remove('visible');
     }
 
     renderPreview(font);
-
-    // Save selection
     localStorage.setItem('font-demo-selected', id);
 }
 
@@ -370,7 +467,7 @@ async function selectFont(id) {
 function applyTheme(t) {
     document.documentElement.setAttribute('data-theme', t);
     document.getElementById('iSun').style.display  = t==='dark' ? 'block' : 'none';
-    document.getElementById('iMoon').style.display = t==='dark' ? 'none' : 'block';
+    document.getElementById('iMoon').style.display = t==='dark' ? 'none'  : 'block';
     document.getElementById('themeLabel').textContent = t==='dark' ? 'Light mode' : 'Dark mode';
     localStorage.setItem('font-demo-theme', t);
 }
@@ -380,8 +477,8 @@ function toggleTheme() {
 
 // ── Init ───────────────────────────────────────────────────────────
 applyTheme(localStorage.getItem('font-demo-theme') || 'dark');
-const savedFont = localStorage.getItem('font-demo-selected') || 'space-grotesk';
-selectFont(savedFont);
+applyPalette(localStorage.getItem('font-demo-palette') || 'bauhaus', false);
+selectFont(localStorage.getItem('font-demo-selected') || 'space-grotesk');
 </script>
 </body>
 </html>
