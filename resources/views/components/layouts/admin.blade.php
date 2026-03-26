@@ -22,11 +22,11 @@
         }
     </style>
 
-    <!-- Dark mode: apply class before paint -->
+    <!-- Dark mode: dark is default; only go light if explicitly saved -->
     <script>
         (function () {
             const saved = localStorage.getItem('theme');
-            if (saved === 'dark') {
+            if (saved !== 'light') {
                 document.documentElement.classList.add('dark');
             }
         })();
@@ -76,19 +76,21 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-bold uppercase tracking-tighter text-white">Admin</h2>
                     <div class="flex items-center gap-2">
-                        <!-- Dark mode toggle -->
-                        <button x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }"
+                        <!-- Dark mode pill toggle -->
+                        <button x-data="{ darkMode: localStorage.getItem('theme') !== 'light' }"
                                 @click="darkMode = !darkMode; localStorage.setItem('theme', darkMode ? 'dark' : 'light'); document.documentElement.classList.toggle('dark', darkMode)"
-                                class="p-1.5 border border-gray-600 hover:border-gray-400 transition-colors focus:outline-none text-gray-400 hover:text-white"
-                                :title="darkMode ? 'Naar licht thema' : 'Naar donker thema'">
-                            <svg x-show="darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
-                            </svg>
-                            <svg x-show="!darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-                            </svg>
+                                :title="darkMode ? 'Naar licht thema' : 'Naar donker thema'"
+                                class="relative inline-flex items-center h-6 w-11 rounded-full focus:outline-none transition-colors duration-300 shrink-0"
+                                :style="darkMode ? 'background-color:#0d5c9c;' : 'background-color:#9ca3af;'">
+                            <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white shadow transition-transform duration-300"
+                                  :style="darkMode ? 'transform:translateX(22px)' : 'transform:translateX(2px)'">
+                                <svg x-show="!darkMode" class="w-2.5 h-2.5" fill="none" stroke="#6b7280" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+                                </svg>
+                                <svg x-show="darkMode" class="w-2.5 h-2.5" fill="none" stroke="#0d5c9c" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                                </svg>
+                            </span>
                         </button>
                         <button @click="sidebarOpen = false" class="md:hidden text-gray-400 hover:text-white transition-colors">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +105,7 @@
                     <a href="{{ route('admin.artworks.index') }}" class="block text-xs uppercase tracking-widest font-bold text-gray-300 hover:text-white border-b border-gray-800 pb-4 transition-colors">Kunstwerken</a>
                     <a href="{{ route('admin.categories.index') }}" class="block text-xs uppercase tracking-widest font-bold text-gray-300 hover:text-white border-b border-gray-800 pb-4 transition-colors">Categorieën</a>
                     <a href="{{ route('admin.profile.edit') }}" class="block text-xs uppercase tracking-widest font-bold text-gray-300 hover:text-white border-b border-gray-800 pb-4 transition-colors">Profiel</a>
-                    <a href="/" target="_blank" class="block text-xs uppercase tracking-widest font-bold text-gray-500 hover:text-gray-300 transition-colors pt-2">↗ Bekijk site</a>
+                    <a href="/" target="_blank" class="block text-xs uppercase tracking-widest font-bold text-gray-500 hover:text-gray-300 transition-colors pt-2">Bekijk site</a>
                 </nav>
 
                 <div class="border-t border-gray-800 pt-8">

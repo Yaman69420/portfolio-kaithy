@@ -1,6 +1,6 @@
 <nav x-data="{
         open: false,
-        darkMode: localStorage.getItem('theme') === 'dark',
+        darkMode: localStorage.getItem('theme') !== 'light',
         toggle() {
             this.darkMode = !this.darkMode;
             localStorage.setItem('theme', this.darkMode ? 'dark' : 'light');
@@ -33,35 +33,39 @@
                 @endif
             @endauth
 
-            <!-- Dark/light toggle -->
-            <button @click="toggle()" class="p-2 border-2 transition-colors focus:outline-none"
-                    style="border-color: var(--b-border); color: var(--b-text);"
-                    :title="darkMode ? 'Naar licht thema' : 'Naar donker thema'">
-                <!-- Sun icon (shown in dark mode) -->
-                <svg x-show="darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
-                </svg>
-                <!-- Moon icon (shown in light mode) -->
-                <svg x-show="!darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-                </svg>
+            <!-- Dark/light pill toggle -->
+            <button @click="toggle()"
+                    :title="darkMode ? 'Naar licht thema' : 'Naar donker thema'"
+                    class="relative inline-flex items-center h-6 w-11 rounded-full focus:outline-none transition-colors duration-300 shrink-0"
+                    :style="darkMode ? 'background-color:#0d5c9c;' : 'background-color:#9ca3af;'">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white shadow transition-transform duration-300"
+                      :style="darkMode ? 'transform:translateX(22px)' : 'transform:translateX(2px)'">
+                    <svg x-show="!darkMode" class="w-2.5 h-2.5" fill="none" stroke="#6b7280" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+                    </svg>
+                    <svg x-show="darkMode" class="w-2.5 h-2.5" fill="none" stroke="#0d5c9c" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </span>
             </button>
         </div>
 
         <!-- Mobile: toggle + hamburger -->
         <div class="md:hidden flex items-center space-x-2">
-            <button @click="toggle()" class="p-2 border-2 focus:outline-none"
-                    style="border-color: var(--b-border); color: var(--b-text);">
-                <svg x-show="darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
-                </svg>
-                <svg x-show="!darkMode" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-                </svg>
+            <!-- Mobile pill toggle -->
+            <button @click="toggle()"
+                    :title="darkMode ? 'Naar licht thema' : 'Naar donker thema'"
+                    class="relative inline-flex items-center h-6 w-11 rounded-full focus:outline-none transition-colors duration-300 shrink-0"
+                    :style="darkMode ? 'background-color:#0d5c9c;' : 'background-color:#9ca3af;'">
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-white shadow transition-transform duration-300"
+                      :style="darkMode ? 'transform:translateX(22px)' : 'transform:translateX(2px)'">
+                    <svg x-show="!darkMode" class="w-2.5 h-2.5" fill="none" stroke="#6b7280" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m15.07-6.07-.71.71M6.34 17.66l-.71.71M17.66 17.66l.71.71M6.34 6.34l.71.71M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+                    </svg>
+                    <svg x-show="darkMode" class="w-2.5 h-2.5" fill="none" stroke="#0d5c9c" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </span>
             </button>
             <button @click="open = !open" class="p-2 focus:outline-none" style="color: var(--b-text);">
                 <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

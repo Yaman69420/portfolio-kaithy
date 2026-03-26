@@ -32,11 +32,11 @@
         }
     </style>
 
-    <!-- Dark mode: apply class before paint to avoid flash -->
+    <!-- Dark mode: dark is default; only go light if explicitly saved -->
     <script>
         (function () {
             const saved = localStorage.getItem('theme');
-            if (saved === 'dark') {
+            if (saved !== 'light') {
                 document.documentElement.classList.add('dark');
             }
         })();

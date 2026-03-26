@@ -3,7 +3,7 @@
         <div class="lg:flex lg:gap-16">
 
             <!-- Image Section -->
-            <div class="lg:w-2/3 mb-12 lg:mb-0">
+            <div class="lg:w-2/3 mb-12 lg:mb-0 anim-slide" style="animation-delay: 0s;">
                 <div class="overflow-hidden" style="background-color: var(--b-surface);">
                     @if($artwork->hasMedia('artworks'))
                         <img src="{{ $artwork->getFirstMediaUrl('artworks', 'optimized') }}"
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Content Section -->
-            <div class="lg:w-1/3 space-y-10">
+            <div class="lg:w-1/3 space-y-10 anim-slide" style="animation-delay: 0.15s;">
                 <div>
                     @if($artwork->category)
                         <span class="text-[10px] font-bold uppercase tracking-widest border-2 px-2 py-0.5 mb-6 inline-block"

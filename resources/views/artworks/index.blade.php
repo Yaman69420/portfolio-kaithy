@@ -2,7 +2,7 @@
     <section class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
 
         <!-- Bauhaus header -->
-        <header class="mb-16">
+        <header class="mb-16 anim-slide" style="animation-delay: 0s;">
             <h1 class="text-7xl md:text-9xl font-bold uppercase tracking-tighter leading-none" style="color: var(--b-text);">
                 Galerij
             </h1>
@@ -18,7 +18,7 @@
 
         <!-- Category filters -->
         @if($categories->count() > 0)
-            <div class="flex flex-wrap gap-3 mb-16">
+            <div class="flex flex-wrap gap-3 mb-16 anim-slide" style="animation-delay: 0.15s;">
                 <a href="{{ route('artworks.index') }}"
                    class="px-5 py-2 text-xs font-bold tracking-widest uppercase border-2 transition-all"
                    style="{{ !request('category') ? 'background-color: var(--b-text); color: var(--b-bg); border-color: var(--b-text);' : 'background-color: transparent; color: var(--b-text); border-color: var(--b-border);' }}">
@@ -48,8 +48,8 @@
                             $accentColors = ['#e03a3e', '#0d5c9c', '#f7b11c'];
                             $accent = $accentColors[$globalIndex % 3];
                         @endphp
-                        <article class="{{ $colSpan }} relative group overflow-hidden transition-all duration-500 hover:-translate-y-1"
-                                 style="background-color: var(--b-surface);">
+                        <article class="{{ $colSpan }} relative group overflow-hidden transition-all duration-500 hover:-translate-y-1 anim-slide"
+                                 style="background-color: var(--b-surface); animation-delay: {{ 0.25 + $globalIndex * 0.12 }}s;">
                             <a href="{{ route('artworks.show', $artwork) }}" class="block">
 
                                 <!-- Coloured circle accent -->

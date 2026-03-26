@@ -2,10 +2,10 @@
     <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
 
         <!-- Bauhaus header -->
-        <h1 class="text-7xl md:text-9xl font-bold uppercase tracking-tighter leading-none mb-4" style="color: var(--b-text);">
+        <h1 class="text-7xl md:text-9xl font-bold uppercase tracking-tighter leading-none mb-4 anim-slide" style="color: var(--b-text); animation-delay: 0s;">
             Contact
         </h1>
-        <div class="flex mb-6" aria-hidden="true">
+        <div class="flex mb-6 anim-slide" aria-hidden="true" style="animation-delay: 0.1s;">
             <div class="h-2 w-32 b-blue"></div>
             <div class="h-2 w-16 b-red"></div>
             <div class="h-2 w-24 b-yellow"></div>
@@ -15,7 +15,7 @@
         </p>
 
         <!-- Form container -->
-        <div class="border-2 overflow-hidden" style="border-color: var(--b-border); background-color: var(--b-surface);">
+        <div class="border-2 overflow-hidden anim-slide" style="border-color: var(--b-border); background-color: var(--b-surface); animation-delay: 0.2s;">
             <div class="p-8 md:p-12">
 
                 @if(session('success'))

@@ -10,10 +10,10 @@
     <section class="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
 
         <!-- Bauhaus header -->
-        <h1 class="text-7xl md:text-9xl font-bold uppercase tracking-tighter leading-none mb-4" style="color: var(--b-text);">
+        <h1 class="text-7xl md:text-9xl font-bold uppercase tracking-tighter leading-none mb-4 anim-slide" style="color: var(--b-text); animation-delay: 0s;">
             Over mij
         </h1>
-        <div class="flex mb-16" aria-hidden="true">
+        <div class="flex mb-16 anim-slide" aria-hidden="true" style="animation-delay: 0.1s;">
             <div class="h-2 w-16 b-yellow"></div>
             <div class="h-2 w-24 b-red"></div>
             <div class="h-2 w-32 b-blue"></div>
@@ -22,7 +22,7 @@
         <div class="flex flex-col md:flex-row items-start gap-16">
 
             <!-- Portrait -->
-            <div class="md:w-1/2">
+            <div class="md:w-1/2 anim-slide" style="animation-delay: 0.2s;">
                 <div class="relative">
                     <div class="absolute -top-4 -left-4 w-full h-full border-2" style="border-color: var(--b-border);"></div>
                     <div class="overflow-hidden aspect-[3/4] relative z-10" style="background-color: var(--b-surface);">
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Text -->
-            <div class="md:w-1/2 space-y-8">
+            <div class="md:w-1/2 space-y-8 anim-slide" style="animation-delay: 0.35s;">
                 <div>
                     <h2 class="text-4xl font-bold uppercase tracking-tighter" style="color: var(--b-text);">{{ $bioName }}</h2>
                     @if($bioSubtitle)
