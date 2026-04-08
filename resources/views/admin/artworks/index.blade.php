@@ -19,9 +19,9 @@
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Acties</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-50">
+                <tbody>
                     @forelse($artworks as $artwork)
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        <tr class="hover:bg-gray-50 transition-colors" style="border-top: 1px solid rgba(255,255,255,0.07);">
                             <td class="px-8 py-4">
                                 <div class="w-16 h-16 rounded-lg bg-gray-100 overflow-hidden shadow-sm">
                                     @if($artwork->hasMedia('artworks'))
