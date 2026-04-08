@@ -14,8 +14,8 @@
 
         <!-- Logo -->
         @php use App\Models\SiteSettings; @endphp
-        <a href="/" class="text-xl font-bold uppercase tracking-tighter" style="color: var(--b-text);">
-            {{ SiteSettings::get('site_name', config('app.name', 'Kaithy')) }}
+        <a href="/" class="flex items-center">
+            <img src="{{ asset('favicon.png') }}" alt="{{ SiteSettings::get('site_name', 'Kaithy') }}" class="h-10 w-auto">
         </a>
 
         <!-- Desktop nav -->

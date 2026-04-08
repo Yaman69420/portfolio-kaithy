@@ -28,6 +28,11 @@ class ProfileController extends Controller
                 'notification_email' => SiteSettings::get('notification_email'),
                 'color_palette'      => SiteSettings::get('color_palette', ''),
                 'site_font'          => SiteSettings::get('site_font', 'space-grotesk'),
+                'custom_c1'          => SiteSettings::get('custom_c1', '#e03a3e'),
+                'custom_c2'          => SiteSettings::get('custom_c2', '#f7b11c'),
+                'custom_c3'          => SiteSettings::get('custom_c3', '#0d5c9c'),
+                'custom_c4'          => SiteSettings::get('custom_c4', '#1a1a1a'),
+                'custom_c5'          => SiteSettings::get('custom_c5', '#f4f4f4'),
             ],
         ]);
     }
@@ -49,8 +54,13 @@ class ProfileController extends Controller
             'notification_email'    => ['nullable', 'email', 'max:255'],
             'profile_photo'         => ['nullable', 'image', 'max:5120'],
             'remove_profile_photo'  => ['nullable', 'boolean'],
-            'color_palette'         => ['nullable', Rule::in(['', 'bauhaus', 'bordeaux', 'naval', 'atelier', 'noir', 'midnight', 'foret', 'bordeaux-nuit'])],
-            'site_font'             => ['nullable', Rule::in(['space-grotesk', 'kaoly', 'bebas-neue', 'playfair', 'cormorant', 'russo-one'])],
+            'color_palette'         => ['nullable', Rule::in(['', 'bauhaus', 'bordeaux', 'naval', 'atelier', 'noir', 'midnight', 'foret', 'bordeaux-nuit', 'custom'])],
+            'site_font'             => ['nullable', Rule::in(['space-grotesk', 'kaoly', 'bebas-neue', 'playfair', 'cormorant', 'russo-one', 'cinzel'])],
+            'custom_c1'             => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'custom_c2'             => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'custom_c3'             => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'custom_c4'             => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'custom_c5'             => ['nullable', 'regex:/^#[0-9A-Fa-f]{6}$/'],
         ]);
 
         // Update user account
@@ -83,6 +93,11 @@ class ProfileController extends Controller
         SiteSettings::set('notification_email', $validated['notification_email'] ?? '');
         SiteSettings::set('color_palette',      $validated['color_palette'] ?? '');
         SiteSettings::set('site_font',          $validated['site_font'] ?? 'space-grotesk');
+        foreach (['custom_c1', 'custom_c2', 'custom_c3', 'custom_c4', 'custom_c5'] as $k) {
+            if ($request->filled($k)) {
+                SiteSettings::set($k, $request->input($k));
+            }
+        }
 
         return back()->with('success', 'Instellingen succesvol opgeslagen.');
     }
