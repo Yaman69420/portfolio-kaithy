@@ -11,7 +11,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr class="bg-gray-50 border-b border-gray-100">
+                    <tr class="bg-gray-50 border-b" style="border-color: rgba(255,255,255,0.08);">
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Beeld</th>
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Titel</th>
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Categorie</th>
@@ -19,9 +19,9 @@
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Acties</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-50">
+                <tbody>
                     @forelse($artworks as $artwork)
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        <tr class="hover:bg-gray-50 transition-colors" style="border-top: 1px solid rgba(255,255,255,0.07);">
                             <td class="px-8 py-4">
                                 <div class="w-16 h-16 rounded-lg bg-gray-100 overflow-hidden shadow-sm">
                                     @if($artwork->hasMedia('artworks'))

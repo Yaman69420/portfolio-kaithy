@@ -251,6 +251,170 @@ MAIL_FROM_NAME="Kaithy Portfolio"</pre>
             </div>
         </div>
 
+        {{-- ── Section 5: Kleurenpalet ── --}}
+        <div class="border-2 overflow-hidden" style="border-color: var(--b-border); background-color: var(--b-surface);">
+            <div class="px-8 py-4 border-b-2 flex items-center gap-3" style="border-color: var(--b-border);">
+                <div class="w-3 h-3 b-blue"></div>
+                <h2 class="text-xs font-bold uppercase tracking-widest" style="color: var(--b-text);">Kleurenpalet</h2>
+            </div>
+            <div class="p-8">
+                @php
+                    $paletteOptions = [
+                        'bauhaus'       => ['label' => 'Bauhaus',        'dark' => false, 'swatches' => ['#e03a3e', '#f7b11c', '#0d5c9c', '#1a1a1a', '#f4f4f4']],
+                        'bordeaux'      => ['label' => 'Bordeaux',       'dark' => false, 'swatches' => ['#8C3040', '#D8CBBA', '#4F6478', '#2D3E50', '#131C27']],
+                        'naval'         => ['label' => 'Naval',          'dark' => false, 'swatches' => ['#1D3A52', '#3D6F87', '#D9D3B3', '#C2B898', '#756B57']],
+                        'atelier'       => ['label' => 'Atelier',        'dark' => false, 'swatches' => ['#1D2320', '#4A5550', '#EEE8D4', '#8B2D2D', '#5A0909']],
+                        'noir'          => ['label' => 'Noir',           'dark' => true,  'swatches' => ['#111111', '#1C1C1C', '#C0392B', '#E8D5A3', '#2C3E50']],
+                        'midnight'      => ['label' => 'Midnight',       'dark' => true,  'swatches' => ['#0D1117', '#161B22', '#4FC3F7', '#FFA726', '#1565C0']],
+                        'foret'         => ['label' => 'Forêt',          'dark' => true,  'swatches' => ['#0D1B0F', '#132115', '#52B788', '#D4A017', '#2D6A4F']],
+                        'bordeaux-nuit' => ['label' => 'Bordeaux Nuit',  'dark' => true,  'swatches' => ['#160B0D', '#1F1215', '#C62A47', '#D4AF37', '#8B4513']],
+                    ];
+                    $currentPalette = $settings['color_palette'] ?: 'bauhaus';
+                @endphp
+                <div x-data="{ selected: '{{ $currentPalette }}' }">
+                    <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: var(--b-text); opacity: 0.45;">Lichte paletten</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        @foreach($paletteOptions as $key => $opt)
+                        @if(!$opt['dark'])
+                        <label class="cursor-pointer" style="display:block;">
+                            <input type="radio" name="color_palette" value="{{ $key }}"
+                                   {{ $currentPalette === $key ? 'checked' : '' }}
+                                   x-on:change="selected = '{{ $key }}'"
+                                   class="sr-only">
+                            <div class="border-2 transition-all"
+                                 :style="selected === '{{ $key }}'
+                                    ? 'border-width:3px;border-color:var(--b-text);opacity:1'
+                                    : 'border-color:var(--b-border);opacity:0.45'">
+                                <div class="flex h-10">
+                                    @foreach($opt['swatches'] as $swatch)
+                                    <div style="background:{{ $swatch }};flex:1;"></div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <p class="mt-2 text-xs font-bold uppercase tracking-widest text-center" style="color: var(--b-text);">{{ $opt['label'] }}</p>
+                        </label>
+                        @endif
+                        @endforeach
+                    </div>
+
+                    <p class="text-xs font-bold uppercase tracking-widest mb-3" style="color: var(--b-text); opacity: 0.45;">Altijd donkere paletten</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        @foreach($paletteOptions as $key => $opt)
+                        @if($opt['dark'])
+                        <label class="cursor-pointer" style="display:block;">
+                            <input type="radio" name="color_palette" value="{{ $key }}"
+                                   {{ $currentPalette === $key ? 'checked' : '' }}
+                                   x-on:change="selected = '{{ $key }}'"
+                                   class="sr-only">
+                            <div class="border-2 transition-all"
+                                 :style="selected === '{{ $key }}'
+                                    ? 'border-width:3px;border-color:var(--b-text);opacity:1'
+                                    : 'border-color:var(--b-border);opacity:0.45'">
+                                <div class="flex h-10">
+                                    @foreach($opt['swatches'] as $swatch)
+                                    <div style="background:{{ $swatch }};flex:1;"></div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <p class="mt-2 text-xs font-bold uppercase tracking-widest text-center" style="color: var(--b-text);">{{ $opt['label'] }}</p>
+                        </label>
+                        @endif
+                        @endforeach
+                    </div>
+
+                    <p class="text-xs font-bold uppercase tracking-widest mt-6 mb-3" style="color: var(--b-text); opacity: 0.45;">Aangepast palet</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <label class="cursor-pointer" style="display:block;">
+                            <input type="radio" name="color_palette" value="custom"
+                                   {{ $currentPalette === 'custom' ? 'checked' : '' }}
+                                   x-on:change="selected = 'custom'"
+                                   class="sr-only">
+                            <div class="border-2 transition-all"
+                                 :style="selected === 'custom'
+                                    ? 'border-width:3px;border-color:var(--b-text);opacity:1'
+                                    : 'border-color:var(--b-border);opacity:0.45'">
+                                <div class="flex h-10">
+                                    <div id="swatch-c1" style="background:{{ $settings['custom_c1'] ?? '#e03a3e' }};flex:1;"></div>
+                                    <div id="swatch-c2" style="background:{{ $settings['custom_c2'] ?? '#f7b11c' }};flex:1;"></div>
+                                    <div id="swatch-c3" style="background:{{ $settings['custom_c3'] ?? '#0d5c9c' }};flex:1;"></div>
+                                    <div id="swatch-c4" style="background:{{ $settings['custom_c4'] ?? '#1a1a1a' }};flex:1;"></div>
+                                    <div id="swatch-c5" style="background:{{ $settings['custom_c5'] ?? '#f4f4f4' }};flex:1;"></div>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-xs font-bold uppercase tracking-widest text-center" style="color: var(--b-text);">Aangepast</p>
+                        </label>
+                    </div>
+
+                    <div x-show="selected === 'custom'" x-cloak class="mt-6 grid grid-cols-2 md:grid-cols-5 gap-4">
+                        @foreach([
+                            ['key'=>'custom_c1','label'=>'Accent 1','default'=>'#e03a3e','swatch'=>'swatch-c1'],
+                            ['key'=>'custom_c2','label'=>'Accent 2','default'=>'#f7b11c','swatch'=>'swatch-c2'],
+                            ['key'=>'custom_c3','label'=>'Accent 3','default'=>'#0d5c9c','swatch'=>'swatch-c3'],
+                            ['key'=>'custom_c4','label'=>'Donker','default'=>'#1a1a1a','swatch'=>'swatch-c4'],
+                            ['key'=>'custom_c5','label'=>'Licht','default'=>'#f4f4f4','swatch'=>'swatch-c5'],
+                        ] as $cp)
+                        <div class="space-y-2">
+                            <label class="text-xs uppercase tracking-widest font-bold" style="color:var(--b-text);opacity:0.6;">{{ $cp['label'] }}</label>
+                            <input type="color" name="{{ $cp['key'] }}"
+                                   value="{{ $settings[$cp['key']] ?? $cp['default'] }}"
+                                   oninput="document.getElementById('{{ $cp['swatch'] }}').style.background=this.value"
+                                   class="w-full h-12 border-2 cursor-pointer p-1"
+                                   style="border-color:var(--b-border);background:var(--b-bg);">
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ── Section 6: Font ── --}}
+        <div class="border-2 overflow-hidden" style="border-color: var(--b-border); background-color: var(--b-surface);">
+            <div class="px-8 py-4 border-b-2 flex items-center gap-3" style="border-color: var(--b-border);">
+                <div class="w-3 h-3 b-yellow"></div>
+                <h2 class="text-xs font-bold uppercase tracking-widest" style="color: var(--b-text);">Font (titels &amp; headings)</h2>
+            </div>
+            <div class="p-8">
+                @php
+                    $fontOptions = [
+                        'space-grotesk' => ['label' => 'Space Grotesk',     'family' => 'Space Grotesk, sans-serif'],
+                        'kaoly'         => ['label' => 'Kaoly',             'family' => 'Kaoly, sans-serif'],
+                        'cinzel'        => ['label' => 'Cinzel Decorative', 'family' => 'Cinzel Decorative, serif'],
+                        'bebas-neue'    => ['label' => 'Bebas Neue',        'family' => 'Bebas Neue, sans-serif'],
+                        'playfair'      => ['label' => 'Playfair Display',  'family' => 'Playfair Display, serif'],
+                        'cormorant'     => ['label' => 'Cormorant Garamond','family' => 'Cormorant Garamond, serif'],
+                        'russo-one'     => ['label' => 'Russo One',         'family' => 'Russo One, sans-serif'],
+                    ];
+                    $currentFont = $settings['site_font'] ?? 'space-grotesk';
+                @endphp
+
+                {{-- Load all font options for the preview --}}
+                <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@700&family=Russo+One&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4"
+                     x-data="{ selected: '{{ $currentFont }}' }">
+                    @foreach($fontOptions as $key => $opt)
+                    <label class="cursor-pointer" style="display:block;">
+                        <input type="radio" name="site_font" value="{{ $key }}"
+                               {{ $currentFont === $key ? 'checked' : '' }}
+                               x-on:change="selected = '{{ $key }}'"
+                               class="sr-only">
+                        <div class="border-2 p-4 transition-all"
+                             style="background-color: var(--b-bg);"
+                             :style="selected === '{{ $key }}'
+                                ? 'border-width:3px;border-color:var(--b-text);opacity:1'
+                                : 'border-color:var(--b-border);opacity:0.55'">
+                            <p style="font-family:{{ $opt['family'] }}; font-size:32px; text-transform:uppercase; line-height:1; color:var(--b-text);">
+                                Kaithy
+                            </p>
+                            <p class="mt-2 text-xs font-bold uppercase tracking-widest" style="font-family:'Space Grotesk',sans-serif; color:var(--b-text); opacity:0.5;">{{ $opt['label'] }}</p>
+                        </div>
+                    </label>
+                    @endforeach
+                </div>
+                <p class="text-xs mt-4" style="color: var(--b-text); opacity: 0.4;">Enkel titels en headings. Body tekst blijft altijd Space Grotesk.</p>
+            </div>
+        </div>
+
         <div class="pt-2">
             <button type="submit"
                     class="px-12 py-4 text-xs font-bold uppercase tracking-widest border-2 transition-all hover:-translate-y-0.5"

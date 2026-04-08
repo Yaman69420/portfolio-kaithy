@@ -26,15 +26,15 @@
             <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr class="bg-gray-50 border-b border-gray-100">
+                    <tr class="bg-gray-50 border-b" style="border-color: rgba(255,255,255,0.08);">
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Naam</th>
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Aantal Kunstwerken</th>
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400 text-right">Acties</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-50">
+                <tbody>
                     @forelse($categories as $category)
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        <tr class="hover:bg-gray-50 transition-colors" style="border-top: 1px solid rgba(255,255,255,0.07);">
                             <td class="px-8 py-4 font-bold">{{ $category->name }}</td>
                             <td class="px-8 py-4 text-sm text-gray-500">{{ $category->artworks_count }}</td>
                             <td class="px-8 py-4 text-right">
