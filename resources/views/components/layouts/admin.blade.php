@@ -14,12 +14,42 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    @php
+        $palette = \App\Models\SiteSettings::get('color_palette', '');
+        $palettes = [
+            'bordeaux'      => ['red'=>'#8C3040','blue'=>'#4F6478','yellow'=>'#D8CBBA','bg'=>'#EDE6DA','text'=>'#131C27','surface'=>'#F5F1EA','border'=>'#131C27','dark_bg'=>'#131C27','dark_text'=>'#D8CBBA','dark_surface'=>'#2D3E50','dark_border'=>'#D8CBBA'],
+            'naval'         => ['red'=>'#3D6F87','blue'=>'#1D3A52','yellow'=>'#C2B898','bg'=>'#E8E4CE','text'=>'#1D3A52','surface'=>'#F2EFE1','border'=>'#1D3A52','dark_bg'=>'#1D3A52','dark_text'=>'#D9D3B3','dark_surface'=>'#263E52','dark_border'=>'#D9D3B3'],
+            'atelier'       => ['red'=>'#8B2D2D','blue'=>'#4A5550','yellow'=>'#EEE8D4','bg'=>'#F2EDE0','text'=>'#1D2320','surface'=>'#FAF8F2','border'=>'#1D2320','dark_bg'=>'#1D2320','dark_text'=>'#EEE8D4','dark_surface'=>'#2A3330','dark_border'=>'#EEE8D4'],
+            'noir'          => ['red'=>'#C0392B','blue'=>'#2C3E50','yellow'=>'#E8D5A3','bg'=>'#111111','text'=>'#F0F0F0','surface'=>'#1C1C1C','border'=>'#F0F0F0','dark_bg'=>'#111111','dark_text'=>'#F0F0F0','dark_surface'=>'#1C1C1C','dark_border'=>'#F0F0F0'],
+            'midnight'      => ['red'=>'#4FC3F7','blue'=>'#1565C0','yellow'=>'#FFA726','bg'=>'#0D1117','text'=>'#C9D1D9','surface'=>'#161B22','border'=>'#30363D','dark_bg'=>'#0D1117','dark_text'=>'#C9D1D9','dark_surface'=>'#161B22','dark_border'=>'#30363D'],
+            'foret'         => ['red'=>'#52B788','blue'=>'#2D6A4F','yellow'=>'#D4A017','bg'=>'#0D1B0F','text'=>'#C8E6C9','surface'=>'#132115','border'=>'#52B788','dark_bg'=>'#0D1B0F','dark_text'=>'#C8E6C9','dark_surface'=>'#132115','dark_border'=>'#52B788'],
+            'bordeaux-nuit' => ['red'=>'#C62A47','blue'=>'#8B4513','yellow'=>'#D4AF37','bg'=>'#160B0D','text'=>'#F0E6D3','surface'=>'#1F1215','border'=>'#C62A47','dark_bg'=>'#160B0D','dark_text'=>'#F0E6D3','dark_surface'=>'#1F1215','dark_border'=>'#C62A47'],
+        ];
+        $p = $palettes[$palette] ?? null;
+    @endphp
     <style>
         body {
             font-family: 'Space Grotesk', sans-serif;
             background-color: var(--b-bg);
             color: var(--b-text);
         }
+        @if($p)
+        :root {
+            --b-red: {{ $p['red'] }};
+            --b-blue: {{ $p['blue'] }};
+            --b-yellow: {{ $p['yellow'] }};
+            --b-bg: {{ $p['bg'] }};
+            --b-text: {{ $p['text'] }};
+            --b-surface: {{ $p['surface'] }};
+            --b-border: {{ $p['border'] }};
+        }
+        html.dark {
+            --b-bg: {{ $p['dark_bg'] }};
+            --b-text: {{ $p['dark_text'] }};
+            --b-surface: {{ $p['dark_surface'] }};
+            --b-border: {{ $p['dark_border'] }};
+        }
+        @endif
     </style>
 
     <!-- Dark mode: dark is default; only go light if explicitly saved -->

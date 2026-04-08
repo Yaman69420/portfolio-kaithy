@@ -26,6 +26,8 @@ class ProfileController extends Controller
                 'instagram_url'      => SiteSettings::get('instagram_url', 'https://instagram.com'),
                 'profile_photo'      => SiteSettings::get('profile_photo'),
                 'notification_email' => SiteSettings::get('notification_email'),
+                'color_palette'      => SiteSettings::get('color_palette', ''),
+                'site_font'          => SiteSettings::get('site_font', 'space-grotesk'),
             ],
         ]);
     }
@@ -47,6 +49,8 @@ class ProfileController extends Controller
             'notification_email'    => ['nullable', 'email', 'max:255'],
             'profile_photo'         => ['nullable', 'image', 'max:5120'],
             'remove_profile_photo'  => ['nullable', 'boolean'],
+            'color_palette'         => ['nullable', Rule::in(['', 'bauhaus', 'bordeaux', 'naval', 'atelier', 'noir', 'midnight', 'foret', 'bordeaux-nuit'])],
+            'site_font'             => ['nullable', Rule::in(['space-grotesk', 'kaoly', 'bebas-neue', 'playfair', 'cormorant', 'russo-one'])],
         ]);
 
         // Update user account
@@ -77,6 +81,8 @@ class ProfileController extends Controller
         SiteSettings::set('instagram_handle',   $validated['instagram_handle'] ?? '');
         SiteSettings::set('instagram_url',      $validated['instagram_url'] ?? '');
         SiteSettings::set('notification_email', $validated['notification_email'] ?? '');
+        SiteSettings::set('color_palette',      $validated['color_palette'] ?? '');
+        SiteSettings::set('site_font',          $validated['site_font'] ?? 'space-grotesk');
 
         return back()->with('success', 'Instellingen succesvol opgeslagen.');
     }
