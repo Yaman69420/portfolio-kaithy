@@ -62,9 +62,11 @@ html.dark .border-gray-50    { border-color: rgba(255,255,255,0.07) !important; 
 html.dark .border-gray-100   { border-color: rgba(255,255,255,0.1) !important; }
 html.dark .border-gray-200   { border-color: rgba(255,255,255,0.15) !important; }
 
-/* divide-* uses border on child elements */
-html.dark .divide-gray-50 > * + *  { border-color: rgba(255,255,255,0.07) !important; }
-html.dark .divide-gray-100 > * + * { border-color: rgba(255,255,255,0.1) !important; }
+/* divide-* uses border on child elements (cover both Tailwind v3 and v4 selectors) */
+html.dark .divide-gray-50 > * + *,
+html.dark .divide-gray-50 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255,255,255,0.06) !important; }
+html.dark .divide-gray-100 > * + *,
+html.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) { border-color: rgba(255,255,255,0.08) !important; }
 
 /* hover states */
 html.dark .hover\:bg-gray-50:hover  { background-color: rgba(255,255,255,0.05) !important; }
