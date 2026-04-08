@@ -11,7 +11,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead>
-                    <tr class="bg-gray-50 border-b border-gray-100">
+                    <tr class="bg-gray-50 border-b" style="border-color: rgba(255,255,255,0.08);">
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Beeld</th>
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Titel</th>
                         <th class="px-8 py-4 text-xs uppercase tracking-widest font-bold text-gray-400">Categorie</th>
